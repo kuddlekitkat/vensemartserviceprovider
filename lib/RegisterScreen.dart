@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vensemartserviceprovider/OtpVerification.dart';
 import 'package:vensemartserviceprovider/screens/ServiceProviderHomeScreen.dart';
 
 import 'LoginScreen.dart';
@@ -183,7 +184,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       Navigator.push(
                         context,
                         new MaterialPageRoute(
-                          builder: (context) => ServiceProviderHomeScreen(),
+                          builder: (context) => OtpVerification(),
                         ),
                       );
 

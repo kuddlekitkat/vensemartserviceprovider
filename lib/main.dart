@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:vensemartserviceprovider/LoginScreen.dart';
 import 'package:vensemartserviceprovider/OnboardingScreen.dart';
+import 'package:vensemartserviceprovider/RegisterScreen.dart';
 import 'package:vensemartserviceprovider/screens/AboutUsScreen.dart';
 import 'package:vensemartserviceprovider/screens/Enable2FAuthScreen.dart';
 import 'package:vensemartserviceprovider/screens/FeedBackScreen.dart';
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: OnboardingScreen(),
+      home: RegisterScreen(),
       routes: {
 
         // ServicesHomeScreen.routeName: (ctx) => ServicesHomeScreen(),

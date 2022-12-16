@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vensemartserviceprovider/OtpVerification.dart';
 import 'package:vensemartserviceprovider/screens/ServiceProviderHomeScreen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -130,7 +131,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Navigator.push(
                         context,
                          MaterialPageRoute(
-                          builder: (context) => ServiceProviderHomeScreen(),
+                          builder: (context) => OtpVerification(),
                         ),
                       );
                     },
