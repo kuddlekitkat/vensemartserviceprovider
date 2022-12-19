@@ -8,7 +8,6 @@ import 'package:vensemartserviceprovider/widgets/full_page/ServiceProviderHome.d
 
 import '../widgets/AppBars/ProfileAppBar.dart';
 import '../widgets/AppBars/RequestAppBar.dart';
-import '../widgets/components/ProfileCard.dart';
 
 
 

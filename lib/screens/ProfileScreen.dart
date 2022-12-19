@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:vensemartserviceprovider/screens/FeedBackScreen.dart';
 import 'package:vensemartserviceprovider/screens/IdentityVerificationScreen.dart';
 import 'package:vensemartserviceprovider/screens/ProfileEditScreen.dart';
-import 'package:vensemartserviceprovider/screens/ServiceProviderHomeScreen.dart';
 import 'package:vensemartserviceprovider/screens/ServiceProviderSecurityScreen.dart';
 import 'package:vensemartserviceprovider/screens/SettingsScreen.dart';
 import 'package:vensemartserviceprovider/screens/SubscriptionPlanListScreen.dart';
 
 import '../LoginScreen.dart';
-import '../widgets/components/ProfileCard.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -221,7 +219,6 @@ class ProfileScreen extends StatelessWidget {
 
                     GestureDetector(
                       onTap: (){
-
                         Navigator.push(
                           context,
                           MaterialPageRoute(
