@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:vensemartserviceprovider/LoginScreen.dart';
 import 'package:vensemartserviceprovider/OnboardingScreen.dart';
 import 'package:vensemartserviceprovider/RegisterScreen.dart';
@@ -14,8 +15,14 @@ import 'package:vensemartserviceprovider/screens/ServiceProviderSecurityScreen.d
 import 'package:vensemartserviceprovider/screens/SubscriptionPlanListScreen.dart';
 import 'package:vensemartserviceprovider/screens/WithdrawalHistoryScreen.dart';
 
+import 'apiservices/provider/provider.dart';
+import 'core/injector.dart';
+import 'core/session_manager.dart';
 
-void main() {
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initializeCore();
   runApp(const MyApp());
 }
 
@@ -26,22 +33,26 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Vensemart Service Provider',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return MultiProvider(
+      providers: Providers.getProviders,
+      builder: (_, __) => MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Vensemart Service Provider',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: SessionManager.instance.authToken.isNotEmpty
+            ? const ServiceProviderHomeScreen()
+            : const OnboardingScreen(),
+        routes: {
+    
+          // ServicesHomeScreen.routeName: (ctx) => ServicesHomeScreen(),
+          // LoginScreen.routeName: (ctx) => ServicesHomeScreen(),
+          // AvailableServicesListScreen.routeName: (ctx) => AvailableServicesListScreen(),
+    
+    
+        },
       ),
-      home: RegisterScreen(),
-      routes: {
-
-        // ServicesHomeScreen.routeName: (ctx) => ServicesHomeScreen(),
-        // LoginScreen.routeName: (ctx) => ServicesHomeScreen(),
-        // AvailableServicesListScreen.routeName: (ctx) => AvailableServicesListScreen(),
-
-
-      },
     );
   }
 }
