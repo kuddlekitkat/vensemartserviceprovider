@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
-import 'package:vensemartserviceprovider/OtpVerification.dart';
 import 'package:vensemartserviceprovider/apiservices/validator.dart';
-import 'package:vensemartserviceprovider/screens/ServiceProviderHomeScreen.dart';
 import 'package:vensemartserviceprovider/screens/provider/provider_services.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -71,14 +69,14 @@ class _LoginScreenState extends State<LoginScreen> {
             children: [
               Container(
                 alignment: Alignment.centerLeft,
-                margin: EdgeInsets.only(left: 12.0,bottom: 4.0),
-                child: Text('Welcome',style: TextStyle(fontWeight:FontWeight.bold,fontSize: 40,color: Colors.white),),
+                margin: const EdgeInsets.only(left: 12.0,bottom: 4.0),
+                child: const Text('Welcome',style: TextStyle(fontWeight:FontWeight.bold,fontSize: 40,color: Colors.white),),
               ),
         
               Container(
                 alignment: Alignment.centerLeft,
-                margin: EdgeInsets.only(left: 12.0,bottom: 4.0),
-                child: Text('Back',style: TextStyle(fontWeight:FontWeight.bold,fontSize: 40,color: Colors.white),),
+                margin: const EdgeInsets.only(left: 12.0,bottom: 4.0),
+                child: const Text('Back',style: TextStyle(fontWeight:FontWeight.bold,fontSize: 40,color: Colors.white),),
               ),
         
               Container(
@@ -91,15 +89,15 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: 25.0,),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 22.0),
+                    const SizedBox(height: 25.0,),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 22.0),
                       child: Text('Email'),
                     ),
         
         
                     Container(
-                      margin: EdgeInsets.all(12.0),
+                      margin: const EdgeInsets.all(12.0),
                       child: TextFormField(
                         controller:emailController,
                         validator:Validators.validateEmail(),
@@ -115,18 +113,18 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             filled: true,
                             hintText: 'email',
-                            prefixIcon: Icon(Icons.email_rounded),
-                            hintStyle: new TextStyle(color: Colors.grey[600]),
-                            fillColor: Color.fromRGBO(250,250,254,1)),
+                            prefixIcon: const Icon(Icons.email_rounded),
+                            hintStyle: TextStyle(color: Colors.grey[600]),
+                            fillColor: const Color.fromRGBO(250,250,254,1)),
                       ),
                     ),
         
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 22.0),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 22.0),
                       child: Text('password'),
                     ),
                     Container(
-                      margin: EdgeInsets.all(12.0),
+                      margin: const EdgeInsets.all(12.0),
                       child: TextFormField(
                         controller: passwordController,
                         validator: Validators.validatePlainPassword(),
@@ -142,20 +140,20 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             filled: true,
                             hintText: 'password',
-                            prefixIcon: Icon(Icons.lock),
-                            suffixIcon: Icon(Icons.remove_red_eye),
-                            hintStyle: new TextStyle(color: Colors.grey[600]),
-                            fillColor: Color.fromRGBO(250,250,254,1)),
+                            prefixIcon: const Icon(Icons.lock),
+                            suffixIcon: const Icon(Icons.remove_red_eye),
+                            hintStyle: TextStyle(color: Colors.grey[600]),
+                            fillColor: const Color.fromRGBO(250,250,254,1)),
                       ),
                     ),
         
         
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
+                      children: const [
         
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 25.0,vertical: 13.0),
+                          padding: EdgeInsets.symmetric(horizontal: 25.0,vertical: 13.0),
                           child: Text('Forgot password ?',style: TextStyle(fontSize: 18.0,fontWeight: FontWeight.bold,color: Colors.blueAccent),),
                         ),
         
@@ -196,10 +194,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('Don\'t have an account?',style: TextStyle(fontWeight: FontWeight.normal,fontSize: 20.0)),
+                        const Text('Don\'t have an account?',style: TextStyle(fontWeight: FontWeight.normal,fontSize: 20.0)),
                         TextButton(onPressed: (){
         
-                        },child: Text('signup',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20.0),),)
+                        },child: const Text('signup',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20.0),),)
                       ],
                     ),
                   ],
