@@ -59,8 +59,6 @@ class ProfileScreen extends StatelessWidget {
                           top: 5,
                           left: 315,
                           child: Icon(Icons.edit,color: Colors.white, size: 20,),)
-
-
                       ],
                     ),
 

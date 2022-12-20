@@ -4,6 +4,8 @@ import 'package:vensemartserviceprovider/LoginScreen.dart';
 import 'package:vensemartserviceprovider/OnboardingScreen.dart';
 import 'package:vensemartserviceprovider/RegisterScreen.dart';
 import 'package:vensemartserviceprovider/screens/AboutUsScreen.dart';
+import 'package:vensemartserviceprovider/screens/AddBankDetailsScreen.dart';
+import 'package:vensemartserviceprovider/screens/BankDetailsScreen.dart';
 import 'package:vensemartserviceprovider/screens/Enable2FAuthScreen.dart';
 import 'package:vensemartserviceprovider/screens/FeedBackScreen.dart';
 import 'package:vensemartserviceprovider/screens/ProfileScreen.dart';
@@ -33,7 +35,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: RegisterScreen(),
+      home: BankDetailsScreen(),
       routes: {
 
         // ServicesHomeScreen.routeName: (ctx) => ServicesHomeScreen(),
