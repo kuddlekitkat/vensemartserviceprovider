@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         home: SessionManager.instance.authToken.isNotEmpty
-            ? const ServiceProviderHomeScreen()
+            ? const LoginScreen()
             : const OnboardingScreen(),
         routes: {
     

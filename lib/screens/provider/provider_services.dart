@@ -1,9 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:vensemartserviceprovider/model/service_home_model.dart';
-import '../../ChoiceIntroScreen.dart';
+import 'package:vensemartserviceprovider/model/user_details_model.dart';
 import '../../OtpVerification.dart';
-import '../../ServiceIntroScreen.dart';
 import '../../apiservices/auth_repo.dart';
 import '../../core/session_manager.dart';
 import '../../model/general_model.dart';
@@ -20,6 +19,8 @@ class ProviderServices extends ChangeNotifier {
   RegisterModel? _registerModel;
   ServiceHomeModel? get serviceHomeModel => _serviceHhomeModel;
   ServiceHomeModel? _serviceHhomeModel;
+  UserDetailsModel? get userDetailModel => _userDetailsModel;
+  UserDetailsModel? _userDetailsModel;
 
   void signIn({Map<String, String>? map, BuildContext? context}) async {
     try {
@@ -120,15 +121,51 @@ class ProviderServices extends ChangeNotifier {
     }
   }
 
-  void serviceHome() async {
+  void updateProfile({context, Map<String, dynamic>? credentials}) async {
     try {
       _isLoading = true;
       notifyListeners();
+      var response = await authRepo.updateProfile(credentials!);
+      if (response != null) {
+        _isLoading = false;
+
+        Navigator.pop(context);
+      }
+      notifyListeners();
+    } catch (e, str) {
+      _isLoading = false;
+      notifyListeners();
+      debugPrint("Error: $e");
+      debugPrint("StackTrace: $str");
+    }
+  }
+
+  void serviceHome() async {
+    try {
+      _isLoading = true;
       Response? response = await authRepo.serviceHome();
       if (response != null && response.statusCode == 200) {
         _isLoading = false;
 
         _serviceHhomeModel = ServiceHomeModel.fromJson(response.data);
+      }
+      notifyListeners();
+    } catch (e, str) {
+      _isLoading = false;
+      notifyListeners();
+      debugPrint("Error: $e");
+      debugPrint("StackTrace: $str");
+    }
+  }
+
+  void getUserDetails() async {
+    try {
+      _isLoading = true;
+      Response? response = await authRepo.getUserDetails();
+      if (response != null && response.statusCode == 200) {
+        _isLoading = false;
+
+        _userDetailsModel = UserDetailsModel.fromJson(response.data);
       }
       notifyListeners();
     } catch (e, str) {

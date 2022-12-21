@@ -43,8 +43,28 @@ class AuthRepo with ApiServices {
     return null;
   }
 
+  Future<Map<String, dynamic> ?> updateProfile(Map<String, dynamic> credentials) async {
+    Map<String, dynamic> ? response = await apiUploadPostRequests("service_update_profile", credentials);
+
+    if (response != null) {
+      return response;
+    }
+
+    return null;
+  }
+
   Future<Response?> serviceHome() async {
     Response? response = await apiGetRequests("service-provider-home",);
+
+    if (response != null) {
+      return response;
+    }
+
+    return null;
+  }
+
+  Future<Response?> getUserDetails() async {
+    Response? response = await apiGetRequests("get_profile");
 
     if (response != null) {
       return response;
