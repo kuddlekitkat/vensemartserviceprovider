@@ -312,7 +312,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                             ),
                             child: const Center(
                               child: Text(
-                                'Update Date',
+                                'Update Profile',
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 22),
                               ),

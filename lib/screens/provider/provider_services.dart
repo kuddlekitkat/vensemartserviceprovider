@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:vensemartserviceprovider/model/service_home_model.dart';
+import 'package:vensemartserviceprovider/model/service_provider_plans.dart';
+import 'package:vensemartserviceprovider/model/upcoming_request.dart';
 import 'package:vensemartserviceprovider/model/user_details_model.dart';
 import '../../OtpVerification.dart';
 import '../../apiservices/auth_repo.dart';
@@ -21,6 +23,24 @@ class ProviderServices extends ChangeNotifier {
   ServiceHomeModel? _serviceHhomeModel;
   UserDetailsModel? get userDetailModel => _userDetailsModel;
   UserDetailsModel? _userDetailsModel;
+
+  ServicesProviderPlans? get serviceProviderPlans => _serviceProviderPlans;
+  ServicesProviderPlans? _serviceProviderPlans;
+
+  UpcomingRequest? get upcomingRequest => _upcomingRequest;
+  UpcomingRequest? _upcomingRequest;
+
+
+  bool get isAvailable =>
+      _upcomingRequest != null &&
+          _upcomingRequest?.data != null &&
+          _upcomingRequest!.data!.isNotEmpty;
+
+  bool get isPresent =>
+      _serviceProviderPlans != null &&
+          _serviceProviderPlans?.data != null &&
+          _serviceProviderPlans!.data!.isNotEmpty;
+
 
   void signIn({Map<String, String>? map, BuildContext? context}) async {
     try {
@@ -157,6 +177,39 @@ class ProviderServices extends ChangeNotifier {
       debugPrint("StackTrace: $str");
     }
   }
+
+  void serviceproviderplans() async {
+    try {
+      _isLoading = true;
+      Response? response = await authRepo.provider_plans();
+      if (response != null && response.statusCode == 200) {
+        _serviceProviderPlans = ServicesProviderPlans.fromJson(response.data);
+        _isLoading = false;
+      }
+      notifyListeners();
+    } catch (e, str) {
+      debugPrint("Error: $e");
+      debugPrint("StackTrace: $str");
+    }
+  }
+
+
+  void upcomingRequests() async {
+    try {
+      _isLoading = true;
+      Response? response = await authRepo.upcomingRequest();
+      if (response != null && response.statusCode == 200) {
+        _upcomingRequest = UpcomingRequest.fromJson(response.data);
+        _isLoading = false;
+      }
+      notifyListeners();
+    } catch (e, str) {
+      debugPrint("Error: $e");
+      debugPrint("StackTrace: $str");
+    }
+  }
+
+
 
   void getUserDetails() async {
     try {

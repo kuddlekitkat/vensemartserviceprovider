@@ -73,4 +73,25 @@ class AuthRepo with ApiServices {
     return null;
   }
 
+  Future<Response?> upcomingRequest() async {
+    Response? response = await apiGetRequests("upcomming_request_list",);
+
+    if (response != null) {
+      return response;
+    }
+
+    return null;
+  }
+
+
+  Future<Response?> provider_plans() async {
+    Response? response = await apiGetRequests("service_subscription_plans",);
+
+    if (response != null) {
+      return response;
+    }
+
+    return null;
+  }
+
   }

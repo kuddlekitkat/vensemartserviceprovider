@@ -1,11 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:vensemartserviceprovider/screens/provider/provider_services.dart';
 import 'package:vensemartserviceprovider/widgets/components/SubscriptionCard.dart';
 
-class SubscriptionPlanListScreen extends StatelessWidget {
+class SubscriptionPlanListScreen extends StatefulWidget {
   const SubscriptionPlanListScreen({Key? key}) : super(key: key);
 
   @override
+  State<SubscriptionPlanListScreen> createState() => _SubscriptionPlanListScreenState();
+}
+
+class _SubscriptionPlanListScreenState extends State<SubscriptionPlanListScreen> {
+
+  ProviderServices? providerServices;
+
+  @override
+  void initState() {
+    providerServices = Provider.of<ProviderServices>(context, listen: false);
+    providerServices?.upcomingRequests();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
@@ -38,14 +56,20 @@ class SubscriptionPlanListScreen extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                  children: [
-                   SizedBox(height: 10,),
-                     SubscriptionCard(),
-                   SizedBox(height: 10,),
-                   SubscriptionCard(),
-                   SizedBox(height: 10,),
-                   SubscriptionCard(),
-                   SizedBox(height: 10,),
-                   SubscriptionCard(),
+
+                   if (providerServices != null)
+                     ...?providerServices?.serviceProviderPlans!.data!
+                         .map((e) => SubscriptionCard())
+                         .toList()
+
+                   // SizedBox(height: 10,),
+                   //   SubscriptionCard(),
+                   // SizedBox(height: 10,),
+                   // SubscriptionCard(),
+                   // SizedBox(height: 10,),
+                   // SubscriptionCard(),
+                   // SizedBox(height: 10,),
+                   // SubscriptionCard(),
 
                  ],
               ),
