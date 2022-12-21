@@ -17,7 +17,7 @@ class _SubscriptionPlanListScreenState extends State<SubscriptionPlanListScreen>
   @override
   void initState() {
     providerServices = Provider.of<ProviderServices>(context, listen: false);
-    providerServices?.upcomingRequests();
+    providerServices?.serviceproviderplans();
     super.initState();
   }
 
