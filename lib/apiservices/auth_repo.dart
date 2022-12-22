@@ -84,7 +84,7 @@ class AuthRepo with ApiServices {
   }
 
 
-  Future<Response?> provider_plans() async {
+  Future<Response?> providerPlans() async {
     Response? response = await apiGetRequests("service_subscription_plans",);
 
     if (response != null) {

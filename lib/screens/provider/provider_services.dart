@@ -181,7 +181,7 @@ class ProviderServices extends ChangeNotifier {
   void serviceproviderplans() async {
     try {
       _isLoading = true;
-      Response? response = await authRepo.provider_plans();
+      Response? response = await authRepo.providerPlans();
       if (response != null && response.statusCode == 200) {
         _serviceProviderPlans = ServicesProviderPlans.fromJson(response.data);
         _isLoading = false;

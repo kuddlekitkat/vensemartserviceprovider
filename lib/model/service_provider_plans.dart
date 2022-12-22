@@ -35,8 +35,8 @@ class Data {
   String? amount;
   String? sAmount;
   String? discription;
-  int? days;
-  int? status;
+  dynamic days;
+  dynamic status;
   String? createdAt;
   String? updatedAt;
 

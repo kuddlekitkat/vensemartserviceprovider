@@ -7,11 +7,12 @@ class SubscriptionPlanListScreen extends StatefulWidget {
   const SubscriptionPlanListScreen({Key? key}) : super(key: key);
 
   @override
-  State<SubscriptionPlanListScreen> createState() => _SubscriptionPlanListScreenState();
+  State<SubscriptionPlanListScreen> createState() =>
+      _SubscriptionPlanListScreenState();
 }
 
-class _SubscriptionPlanListScreenState extends State<SubscriptionPlanListScreen> {
-
+class _SubscriptionPlanListScreenState
+    extends State<SubscriptionPlanListScreen> {
   ProviderServices? providerServices;
 
   @override
@@ -23,16 +24,15 @@ class _SubscriptionPlanListScreenState extends State<SubscriptionPlanListScreen>
 
   @override
   Widget build(BuildContext context) {
-
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
         backgroundColor: Color.fromRGBO(234, 234, 234, 2),
         appBar: AppBar(
           backgroundColor: Color(0xff1456f1),
-          title:  Text("Subscriptions"),
-          leading:  IconButton(
-            icon:  CircleAvatar(
+          title: Text("Subscriptions"),
+          leading: IconButton(
+            icon: CircleAvatar(
               radius: 20,
               backgroundColor: Colors.white,
               child: Center(
@@ -54,24 +54,38 @@ class _SubscriptionPlanListScreenState extends State<SubscriptionPlanListScreen>
           child: Padding(
             padding: const EdgeInsets.all(15.0),
             child: SingleChildScrollView(
-              child: Column(
-                 children: [
+              child: Consumer<ProviderServices>(
+                builder: (_, provider, __) {
+                  print('object ${provider.serviceProviderPlans?.data}');
+                  if (provider.serviceProviderPlans?.data == null) {
+                    return const CircularProgressIndicator();
+                  } else {
+                    return Column(
+                      children: [
+                        ...provider.serviceProviderPlans!.data!.map((e) {
+                          print('print e for me $e');
+                          return SubscriptionCard(
+                            servicesProviderPlans: e,
+                          );
+                        }).toList()
+                        // ...?provider.serviceProviderPlans?.data!
+                        //     .map((e) => SubscriptionCard(
+                        //           servicesProviderPlans: e,
+                        //         ))
+                        //     .toList()
 
-                   if (providerServices != null)
-                     ...?providerServices?.serviceProviderPlans!.data!
-                         .map((e) => SubscriptionCard())
-                         .toList()
-
-                   // SizedBox(height: 10,),
-                   //   SubscriptionCard(),
-                   // SizedBox(height: 10,),
-                   // SubscriptionCard(),
-                   // SizedBox(height: 10,),
-                   // SubscriptionCard(),
-                   // SizedBox(height: 10,),
-                   // SubscriptionCard(),
-
-                 ],
+                        // SizedBox(height: 10,),
+                        //   SubscriptionCard(),
+                        // SizedBox(height: 10,),
+                        // SubscriptionCard(),
+                        // SizedBox(height: 10,),
+                        // SubscriptionCard(),
+                        // SizedBox(height: 10,),
+                        // SubscriptionCard(),
+                      ],
+                    );
+                  }
+                },
               ),
             ),
           ),
