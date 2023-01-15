@@ -36,11 +36,18 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_advanced_segment: ^3.0.1
+  flutter_config: ^2.0.0
+  flutter_dotenv: ^5.0.2
+  flutter_google_places: ^0.3.0
   flutter_native_splash: ^2.2.14
+  flutter_paystack: ^1.0.7
   flutter_rating_bar: ^4.0.1
   flutter_spinkit: ^5.1.0
   font_awesome_flutter: ^10.2.1
   get_it: ^7.2.0
+  google_api_headers: ^1.5.0
+  google_maps_flutter: ^2.2.3
+  google_maps_webservice: ^0.0.19
   image_cropper: ^3.0.1
   image_picker: ^0.8.6
   pretty_dio_logger: ^1.1.1
@@ -69,6 +76,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - .env
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

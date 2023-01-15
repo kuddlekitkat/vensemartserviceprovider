@@ -66,6 +66,8 @@ class _SubscriptionPlanListScreenState
                           print('print e for me $e');
                           return SubscriptionCard(
                             servicesProviderPlans: e,
+                            loginModel: provider.loginModel,
+
                           );
                         }).toList()
                         // ...?provider.serviceProviderPlans?.data!

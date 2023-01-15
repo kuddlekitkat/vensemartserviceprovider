@@ -148,8 +148,13 @@ class ProviderServices extends ChangeNotifier {
       var response = await authRepo.updateProfile(credentials!);
       if (response != null) {
         _isLoading = false;
+        Navigator.push(
+          context!,
+          MaterialPageRoute(
+            builder: (context) => const ServiceProviderHomeScreen(),
+          ),
+        );
 
-        Navigator.pop(context);
       }
       notifyListeners();
     } catch (e, str) {
