@@ -1,11 +1,11 @@
-class UpcomingRequest {
+class GetServiceProviderPlan {
   int? status;
   String? message;
   List<Data>? data;
 
-  UpcomingRequest({this.status, this.message, this.data});
+  GetServiceProviderPlan({this.status, this.message, this.data});
 
-  UpcomingRequest.fromJson(Map<String, dynamic> json) {
+  GetServiceProviderPlan.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
     if (json['data'] != null) {

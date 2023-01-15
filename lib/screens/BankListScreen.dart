@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:vensemartserviceprovider/screens/provider/provider_services.dart';
 import 'package:vensemartserviceprovider/widgets/components/SubscriptionCard.dart';
 
-class SubscriptionPlanListScreen extends StatefulWidget {
-  const SubscriptionPlanListScreen({Key? key}) : super(key: key);
+import '../widgets/components/BankCard.dart';
+
+class BankListScreen extends StatefulWidget {
+  const BankListScreen({Key? key}) : super(key: key);
 
   @override
-  State<SubscriptionPlanListScreen> createState() =>
-      _SubscriptionPlanListScreenState();
+  State<BankListScreen> createState() =>
+      _BankListScreenState();
 }
 
-class _SubscriptionPlanListScreenState
-    extends State<SubscriptionPlanListScreen> {
+class _BankListScreenState extends State<BankListScreen> {
   ProviderServices? providerServices;
 
   @override
   void initState() {
     providerServices = Provider.of<ProviderServices>(context, listen: false);
-    providerServices?.serviceproviderplans();
+    providerServices?.bank_plans();
     super.initState();
   }
 
@@ -57,16 +57,16 @@ class _SubscriptionPlanListScreenState
             child: SingleChildScrollView(
               child: Consumer<ProviderServices>(
                 builder: (_, provider, __) {
-                  print('object ${provider.serviceProviderPlans?.data}');
-                  if (provider.serviceProviderPlans?.data == null) {
-                    return Center(child: SpinKitCircle());
+                  print('object ${provider.bankProviderPlans?.data}');
+                  if (provider.bankProviderPlans?.data == null) {
+                    return const CircularProgressIndicator();
                   } else {
                     return Column(
                       children: [
-                        ...provider.serviceProviderPlans!.data!.map((e) {
+                        ...provider.bankProviderPlans!.data!.map((e) {
                           print('print e for me $e');
-                          return SubscriptionCard(
-                            servicesProviderPlans: e,
+                          return BankCard(
+                            bankProviderPlans: e,
                           );
                         }).toList()
                         // ...?provider.serviceProviderPlans?.data!

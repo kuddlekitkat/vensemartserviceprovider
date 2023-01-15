@@ -1,5 +1,9 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_geocoder/geocoder.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:provider/provider.dart';
+import 'package:vensemartserviceprovider/screens/provider/provider_services.dart';
 
 class ServiceLocationScreen extends StatefulWidget {
   const ServiceLocationScreen({Key? key}) : super(key: key);
@@ -9,6 +13,53 @@ class ServiceLocationScreen extends StatefulWidget {
 }
 
 class _ServiceLocationScreenState extends State<ServiceLocationScreen> {
+
+
+  ProviderServices? providerServices;
+  TextEditingController controller = TextEditingController();
+  String _query = '';
+  List searchItem = [];
+
+  int intval = 0;
+
+
+
+
+  @override
+  void initState() {
+    providerServices = Provider.of<ProviderServices>(context, listen: false);
+    providerServices?.services();
+    // searchItem.clear();
+    super.initState();
+  }
+
+
+  void sendLocation(context) async {
+    if (true) {
+
+      final query = addressController.text.trim();
+      var addresses = await Geocoder.local.findAddressesFromQuery(query);
+      var first = addresses.first;
+      print("${first.featureName} : ${first.coordinates.latitude} , ${first.coordinates.longitude}");
+      providerServices?.sendLocation(map: {
+        "location": addressController.text.trim(),
+        "location_lat": "7.4701862",
+        "location_long": "9.078749"
+      }, context: context);
+    }
+  }
+
+
+  // Future<void> printLatLong() async {
+  //   final query = addressController.text.trim();
+  //   var addresses = await Geocoder.local.findAddressesFromQuery(query);
+  //   var first = addresses.first;
+  //   print("${first.featureName} : ${first.coordinates.latitude}");
+  //
+  // }
+
+  TextEditingController addressController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
 
@@ -92,7 +143,7 @@ class _ServiceLocationScreenState extends State<ServiceLocationScreen> {
             Container(
               alignment: Alignment.centerLeft,
               margin: EdgeInsets.only(left: 12.0,bottom: 4.0),
-              child: Text('Location Details',style: TextStyle(fontWeight:FontWeight.bold,fontSize: 40,color: Colors.white),),
+              child: Text('Address Details',style: TextStyle(fontWeight:FontWeight.bold,fontSize: 40,color: Colors.white),),
             ),
 
 
@@ -112,53 +163,54 @@ class _ServiceLocationScreenState extends State<ServiceLocationScreen> {
 
 
 
-                  Container(
-                    decoration: BoxDecoration(
-                        color: Color.fromRGBO(250,250,254,1),
-                        borderRadius: BorderRadius.circular(12.0)//<-- SEE HERE
-                    ),
-                    margin: EdgeInsets.all(12.0),
-                    child: Center(
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton2(
-                          hint: Text(
-                            'Select location',
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Theme
-                                  .of(context)
-                                  .hintColor,
-                            ),
-                          ),
-                          items: items
-                              .map((item) =>
-                              DropdownMenuItem<String>(
-                                value: item,
-                                child: Text(
-                                  item,
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ))
-                              .toList(),
-                          value: selectedValue,
-                          onChanged: (value) {
-                            setState(() {
-                              selectedValue = value as String;
-                            });
-                          },
-                          buttonHeight: 70,
-                          buttonWidth: 280,
-                          itemHeight: 50,
-                        ),
-                      ),
-                    ),
-                  ),
+                  // Container(
+                  //   decoration: BoxDecoration(
+                  //       color: Color.fromRGBO(250,250,254,1),
+                  //       borderRadius: BorderRadius.circular(12.0)//<-- SEE HERE
+                  //   ),
+                  //   margin: EdgeInsets.all(12.0),
+                  //   child: Center(
+                  //     child: DropdownButtonHideUnderline(
+                  //       child: DropdownButton2(
+                  //         hint: Text(
+                  //           'Select location',
+                  //           style: TextStyle(
+                  //             fontSize: 20,
+                  //             color: Theme
+                  //                 .of(context)
+                  //                 .hintColor,
+                  //           ),
+                  //         ),
+                  //         items: items
+                  //             .map((item) =>
+                  //             DropdownMenuItem<String>(
+                  //               value: item,
+                  //               child: Text(
+                  //                 item,
+                  //                 style: const TextStyle(
+                  //                   fontSize: 14,
+                  //                 ),
+                  //               ),
+                  //             ))
+                  //             .toList(),
+                  //         value: selectedValue,
+                  //         onChanged: (value) {
+                  //           setState(() {
+                  //             selectedValue = value as String;
+                  //           });
+                  //         },
+                  //         buttonHeight: 70,
+                  //         buttonWidth: 280,
+                  //         itemHeight: 50,
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
 
                   Container(
                     margin: EdgeInsets.all(12.0),
                     child: TextFormField(
+                      controller: addressController,
                       decoration: InputDecoration(
                           border: const OutlineInputBorder(
                             borderRadius: BorderRadius.all(
@@ -170,7 +222,7 @@ class _ServiceLocationScreenState extends State<ServiceLocationScreen> {
                             ),
                           ),
                           filled: true,
-                          hintText: 'Enter location',
+                          hintText: 'Enter Address',
                           prefixIcon: Icon(Icons.location_on),
                           hintStyle: new TextStyle(color: Colors.grey[600]),
                           fillColor: Color.fromRGBO(250,250,254,1)),
@@ -184,27 +236,34 @@ class _ServiceLocationScreenState extends State<ServiceLocationScreen> {
 
 
                   GestureDetector(
-                    onTap: (){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ServiceLocationScreen(),
+                    onTap: () => sendLocation(context),
+                    child: Consumer<ProviderServices>(
+                      builder: (_, value, __) => Center(
+                        child: Container(
+                          height: screenHeight / 11,
+                          width: screenWidth / 1.10,
+                          decoration: BoxDecoration(
+                            color: const Color(0xff1456f1),
+                            borderRadius: BorderRadius.circular(90.0),
+                          ),
+                          child: value.isLoading == true
+                              ? const SpinKitCircle(
+                            color: Colors.white,
+                          )
+                              : const Center(
+                            child: Text(
+                              'Proceed',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
                         ),
-                      );
-                    },
-                    child: Center(
-                      child: Container(
-                        height: screenHeight/11,
-                        width: screenWidth/1.10,
-                        decoration: BoxDecoration(
-                          color: Color(0xff1456f1),
-                          borderRadius: BorderRadius.circular(90.0),
-
-                        ),
-                        child: Center(child: Text('Proceed',style: TextStyle(color: Colors.white,fontSize: 20.0,fontWeight: FontWeight.bold),),),
                       ),
                     ),
                   ),
+
 
 
 

@@ -1,11 +1,11 @@
-class UpcomingRequest {
+class CanceledRequestModel {
   int? status;
   String? message;
   List<Data>? data;
 
-  UpcomingRequest({this.status, this.message, this.data});
+  CanceledRequestModel({this.status, this.message, this.data});
 
-  UpcomingRequest.fromJson(Map<String, dynamic> json) {
+  CanceledRequestModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
     if (json['data'] != null) {

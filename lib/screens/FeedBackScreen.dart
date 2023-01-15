@@ -56,13 +56,13 @@ class FeedBackScreen extends StatelessWidget {
 
               SizedBox(height: 20),
               Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
                     height: MediaQuery.of(context).size.height/17,
                     width: MediaQuery.of(context).size.width/3,
                     decoration: BoxDecoration(
-                      color: Colors.blueAccent,
+                      color: Color(0xff1456f1),
                       borderRadius: BorderRadius.circular(20.0),
 
                     ),

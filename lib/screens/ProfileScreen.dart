@@ -207,14 +207,14 @@ class ProfileScreen extends StatelessWidget {
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
+                          children: const [
+                            Text(
                               'My Subscription',
                               style:
                                   TextStyle(color: Colors.black, fontSize: 19),
                             ),
-                            const Text('Manage your subscription',
-                                style: TextStyle(color: Colors.grey)),
+                            Text('Manage your subscription',
+                                style: TextStyle(color: Colors.grey,fontSize: 10)),
                           ],
                         ),
                       ],
@@ -265,14 +265,14 @@ class ProfileScreen extends StatelessWidget {
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
+                          children: const [
+                            Text(
                               'Account Verification',
                               style:
                                   TextStyle(color: Colors.black, fontSize: 19),
                             ),
-                            const Text('Verify your identity to be verified',
-                                style: TextStyle(color: Colors.grey)),
+                            Text('Verify your identity to be verified',
+                                style: TextStyle(color: Colors.grey,fontSize: 10)),
                           ],
                         ),
                       ],
@@ -330,7 +330,7 @@ class ProfileScreen extends StatelessWidget {
                                   TextStyle(color: Colors.black, fontSize: 19),
                             ),
                             const Text('Report errors and bugs to improve the app',
-                                style: TextStyle(color: Colors.grey)),
+                                style: TextStyle(color: Colors.grey,fontSize: 10)),
                           ],
                         ),
                       ],
@@ -381,14 +381,14 @@ class ProfileScreen extends StatelessWidget {
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
+                          children: const [
+                            Text(
                               'Preferences',
                               style:
                                   TextStyle(color: Colors.black, fontSize: 19),
                             ),
-                            const Text('Customise vensemart to suit you',
-                                style: TextStyle(color: Colors.grey)),
+                            Text('Customise vensemart to suit you',
+                                style: TextStyle(color: Colors.grey,fontSize: 10)),
                           ],
                         ),
                       ],
@@ -439,14 +439,14 @@ class ProfileScreen extends StatelessWidget {
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
+                          children: const [
+                            Text(
                               'Logout',
                               style:
                                   TextStyle(color: Colors.black, fontSize: 19),
                             ),
-                            const Text('Sign out from vensemart',
-                                style: TextStyle(color: Colors.grey)),
+                            Text('Sign out from vensemart',
+                                style: TextStyle(color: Colors.grey,fontSize: 10)),
                           ],
                         ),
                       ],

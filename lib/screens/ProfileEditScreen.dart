@@ -49,9 +49,9 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         "name": nameController.text.trim(),
         "email": emailController.text.trim(),
         "mobile_number": phoneController.text.trim(),
-        "address": addressController.text.trim(),
-        "gender": genderController.text.trim(),
-        "date_of_birth": dobController.text.trim(),
+        // "address": addressController.text.trim(),
+        // "gender": genderController.text.trim(),
+        // "date_of_birth": dobController.text.trim(),
         "profile": MultipartFile.fromBytes(
             _formartFileImage(fileImage).readAsBytesSync(),
             filename: fileImage!.path.split("/").last),
@@ -119,7 +119,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                       GestureDetector(
                         onTap: () => _getImage(context),
                         child: 
-                        // provider.userDetailModel!.data!.profile != null
+                        // provider.userDetailModel!.data!.profile !=  null
                         //     ? Center(
                         //         child: CachedNetworkImage(
                         //           imageUrl:
@@ -218,88 +218,88 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                             fillColor: Colors.white),
                       ),
                       const SizedBox(height: 14.0),
-                      const Text('Nin'),
-                      const SizedBox(height: 4.0),
-                      TextFormField(
-                        controller: ninController,
-                        validator: Validators.validateInt(),
-                        decoration: InputDecoration(
-                            border: const OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10.0),
-                              ),
-                              borderSide: BorderSide(
-                                width: 0,
-                                style: BorderStyle.none,
-                              ),
-                            ),
-                            filled: true,
-                            hintStyle: new TextStyle(color: Colors.grey[600]),
-                            fillColor: Colors.white),
-                      ),
-                      const SizedBox(height: 14.0),
-                      const Text('Date of birth'),
-                      const SizedBox(height: 4.0),
-                      TextFormField(
-                        controller: dobController,
-                        validator: Validators.validateString(),
-                        decoration: InputDecoration(
-                            border: const OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10.0),
-                              ),
-                              borderSide: BorderSide(
-                                width: 0,
-                                style: BorderStyle.none,
-                              ),
-                            ),
-                            filled: true,
-                            hintStyle: new TextStyle(color: Colors.grey[600]),
-                            fillColor: Colors.white),
-                      ),
-                      const SizedBox(height: 14.0),
-                      const Text('Gender'),
-                      const SizedBox(height: 4.0),
-                      TextFormField(
-                        controller: genderController,
-                        validator: Validators.validateString(),
-                        decoration: InputDecoration(
-                            border: const OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10.0),
-                              ),
-                              borderSide: BorderSide(
-                                width: 0,
-                                style: BorderStyle.none,
-                              ),
-                            ),
-                            filled: true,
-                            hintStyle: new TextStyle(color: Colors.grey[600]),
-                            fillColor: Colors.white),
-                      ),
-                      const SizedBox(height: 14.0),
-                      const Text('Address'),
-                      const SizedBox(height: 4.0),
-                      TextFormField(
-                        controller: addressController,
-                        validator: Validators.validateString(),
-                        decoration: InputDecoration(
-                            border: const OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10.0),
-                              ),
-                              borderSide: BorderSide(
-                                width: 0,
-                                style: BorderStyle.none,
-                              ),
-                            ),
-                            filled: true,
-                            hintStyle: new TextStyle(color: Colors.grey[600]),
-                            fillColor: Colors.white),
-                      ),
-                      const SizedBox(
-                        height: 30.0,
-                      ),
+                      // const Text('Nin'),
+                      // const SizedBox(height: 4.0),
+                      // TextFormField(
+                      //   controller: ninController,
+                      //   validator: Validators.validateInt(),
+                      //   decoration: InputDecoration(
+                      //       border: const OutlineInputBorder(
+                      //         borderRadius: BorderRadius.all(
+                      //           Radius.circular(10.0),
+                      //         ),
+                      //         borderSide: BorderSide(
+                      //           width: 0,
+                      //           style: BorderStyle.none,
+                      //         ),
+                      //       ),
+                      //       filled: true,
+                      //       hintStyle: new TextStyle(color: Colors.grey[600]),
+                      //       fillColor: Colors.white),
+                      // ),
+                      // const SizedBox(height: 14.0),
+                      // const Text('Date of birth'),
+                      // const SizedBox(height: 4.0),
+                      // TextFormField(
+                      //   controller: dobController,
+                      //   validator: Validators.validateString(),
+                      //   decoration: InputDecoration(
+                      //       border: const OutlineInputBorder(
+                      //         borderRadius: BorderRadius.all(
+                      //           Radius.circular(10.0),
+                      //         ),
+                      //         borderSide: BorderSide(
+                      //           width: 0,
+                      //           style: BorderStyle.none,
+                      //         ),
+                      //       ),
+                      //       filled: true,
+                      //       hintStyle: new TextStyle(color: Colors.grey[600]),
+                      //       fillColor: Colors.white),
+                      // ),
+                      // const SizedBox(height: 14.0),
+                      // const Text('Gender'),
+                      // const SizedBox(height: 4.0),
+                      // TextFormField(
+                      //   controller: genderController,
+                      //   validator: Validators.validateString(),
+                      //   decoration: InputDecoration(
+                      //       border: const OutlineInputBorder(
+                      //         borderRadius: BorderRadius.all(
+                      //           Radius.circular(10.0),
+                      //         ),
+                      //         borderSide: BorderSide(
+                      //           width: 0,
+                      //           style: BorderStyle.none,
+                      //         ),
+                      //       ),
+                      //       filled: true,
+                      //       hintStyle: new TextStyle(color: Colors.grey[600]),
+                      //       fillColor: Colors.white),
+                      // ),
+                      // const SizedBox(height: 14.0),
+                      // const Text('Address'),
+                      // const SizedBox(height: 4.0),
+                      // TextFormField(
+                      //   controller: addressController,
+                      //   validator: Validators.validateString(),
+                      //   decoration: InputDecoration(
+                      //       border: const OutlineInputBorder(
+                      //         borderRadius: BorderRadius.all(
+                      //           Radius.circular(10.0),
+                      //         ),
+                      //         borderSide: BorderSide(
+                      //           width: 0,
+                      //           style: BorderStyle.none,
+                      //         ),
+                      //       ),
+                      //       filled: true,
+                      //       hintStyle: new TextStyle(color: Colors.grey[600]),
+                      //       fillColor: Colors.white),
+                      // ),
+                      // const SizedBox(
+                      //   height: 30.0,
+                      // ),
                       Center(
                         child: GestureDetector(
                           onTap: () => updateProfile(context),

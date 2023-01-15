@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 
-import '../../model/service_provider_plans.dart';
+import '../../model/bank_plans.dart';
 
-class SubscriptionCard extends StatelessWidget {
-
-  SubscriptionCard({Key? key, this.servicesProviderPlans}) : super(key: key);
-  Data? servicesProviderPlans;
+class BankCard extends StatelessWidget {
+  BankCard({Key? key, this.bankProviderPlans}) : super(key: key);
+  Data? bankProviderPlans;
 
   @override
   Widget build(BuildContext context) {
-    print('set me up $servicesProviderPlans');
+    print('set me up $bankProviderPlans');
     var screenheight = MediaQuery.of(context).size.height;
     var screenwidth = MediaQuery.of(context).size.width;
     return Container(
@@ -26,12 +25,12 @@ class SubscriptionCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(servicesProviderPlans?.planType ?? ''),
+              Text(bankProviderPlans?.code ?? ''),
               Container(
                 height: screenheight / 10,
                 width: screenwidth / 2,
                 child: Text(
-                  servicesProviderPlans?.discription ?? '',
+                  bankProviderPlans?.name ?? '',
                   style: TextStyle(fontSize: screenwidth / 38),
                 ),
               ),
@@ -46,7 +45,7 @@ class SubscriptionCard extends StatelessWidget {
                 height: screenheight / 10,
                 width: screenwidth / 4,
                 child: Text(
-                  servicesProviderPlans?.amount ?? '',
+                  bankProviderPlans?.name ?? '',
                   style: TextStyle(fontSize: screenwidth / 25),
                 ),
               ),

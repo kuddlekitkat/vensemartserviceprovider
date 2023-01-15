@@ -18,13 +18,14 @@ class _ServiceProviderHomeState extends State<ServiceProviderHome> {
   void initState() {
     providerServices = Provider.of<ProviderServices>(context, listen: false);
     providerServices?.serviceHome();
+    providerServices?.upcomingRequests();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ProviderServices>(builder: (_, value, __) {
-      if (value.serviceHomeModel?.data == null) {
+    return Consumer<ProviderServices>(builder: (_, provider, __) {
+      if (provider.serviceHomeModel?.data == null) {
         return SpinKitCircle(
           color: Colors.blue[900],
         );
@@ -69,7 +70,7 @@ class _ServiceProviderHomeState extends State<ServiceProviderHome> {
                           top: 50,
                           left: 10,
                           child: Text(
-                            value.serviceHomeModel?.data?.pendingRequests.toString()??'',
+                            provider.serviceHomeModel?.data?.pendingRequests.toString()??'',
                             style: const TextStyle(
                                 fontSize: 35,
                                 fontWeight: FontWeight.bold,
@@ -111,7 +112,7 @@ class _ServiceProviderHomeState extends State<ServiceProviderHome> {
                           top: 50,
                           left: 10,
                           child: Text(
-                            value.serviceHomeModel?.data?.completedRequests.toString()??'',
+                            provider.serviceHomeModel?.data?.completedRequests.toString()??'',
                             style: const TextStyle(
                                 fontSize: 35,
                                 fontWeight: FontWeight.bold,
@@ -161,7 +162,7 @@ class _ServiceProviderHomeState extends State<ServiceProviderHome> {
                           top: 50,
                           left: 10,
                           child: Text(
-                            value.serviceHomeModel?.data?.cancelledRequests.toString()??'',
+                            provider.serviceHomeModel?.data?.cancelledRequests.toString()??'',
                             style: const TextStyle(
                                 fontSize: 35,
                                 fontWeight: FontWeight.bold,
@@ -203,7 +204,7 @@ class _ServiceProviderHomeState extends State<ServiceProviderHome> {
                           top: 50,
                           left: 10,
                           child: Text(
-                            value.serviceHomeModel?.data?.totalRequests?.toString()??'',
+                            provider.serviceHomeModel?.data?.totalRequests?.toString()??'',
                             style: const TextStyle(
                                 fontSize: 35,
                                 fontWeight: FontWeight.bold,
@@ -233,11 +234,25 @@ class _ServiceProviderHomeState extends State<ServiceProviderHome> {
               const SizedBox(
                 height: 20.0,
               ),
-              const ServiceRequestCard(),
-              const SizedBox(
-                height: 20.0,
-              ),
-              const ServiceRequestCard(),
+              Column(
+                children: [
+                  ...provider.serviceHomeModel!.data!.requests!.map((e) {
+                    print('print e for me $e');
+                    return Text(
+                      'New Request'
+                    );
+                  }).toList()
+
+                ],
+              )
+
+
+
+              // const ServiceRequestCard(),
+              // const SizedBox(
+              //   height: 20.0,
+              // ),
+              // const ServiceRequestCard(),
             ],
           ),
         ),

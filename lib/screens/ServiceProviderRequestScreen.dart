@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vensemartserviceprovider/widgets/components/CancelledRequestList.dart';
 import 'package:vensemartserviceprovider/widgets/components/CompletedRequestList.dart';
 import 'package:vensemartserviceprovider/widgets/components/RequestList.dart';
 import 'package:vensemartserviceprovider/widgets/components/ServiceRequestCard.dart';
@@ -57,7 +58,7 @@ class _ServiceProviderRequestScreenState extends State<ServiceProviderRequestScr
 
                   child: Column(
                     children: [
-
+                       SizedBox(height: 12.0,),
                       Padding(
                         padding: const EdgeInsets.only(bottom: 13.0),
                         child: Center(
@@ -66,6 +67,7 @@ class _ServiceProviderRequestScreenState extends State<ServiceProviderRequestScr
                             segments: const {
                               'all': 'Upcoming',
                               'missed': 'Completed',
+                              'cancelled': 'Cancelled',
                             },
                             backgroundColor: Colors.white10,
                             activeStyle: const TextStyle(
@@ -88,6 +90,8 @@ class _ServiceProviderRequestScreenState extends State<ServiceProviderRequestScr
                               return const RequestList();
                             case 'missed':
                               return const CompletedRequestList();
+                            case 'cancelled':
+                              return const CancelledRequestList();
                             default:
                               return const SizedBox();
                           }

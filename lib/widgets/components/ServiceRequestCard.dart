@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:vensemartserviceprovider/model/upcoming_request.dart';
 
 class ServiceRequestCard extends StatelessWidget {
-  const ServiceRequestCard({Key? key}) : super(key: key);
+  Data? UpcomingRequest;
+  ServiceRequestCard({Key? key, required this.UpcomingRequest}) : super(key: key);
+
+
 
   @override
   Widget build(BuildContext context) {
+    print('set me up $UpcomingRequest');
     return Container(
       decoration: BoxDecoration(
           color: Colors.white,
@@ -29,11 +34,12 @@ class ServiceRequestCard extends StatelessWidget {
              margin: EdgeInsets.only(top: 22,left: 10),
              child: Column(
                crossAxisAlignment: CrossAxisAlignment.start,
-               children: const [
+               children:  [
                  Text('New Service Request'),
-                 Text('Garki, Area || '),
-                 Text('From: aarondikko@gmail.com'),
-                 Text('29 Oct 2022'),
+                 Text('${UpcomingRequest?.name}' ?? ''),
+                 Text('From: ${UpcomingRequest?.email}'),
+                 Text('${UpcomingRequest?.bookingDate}'),
+                 Text('${UpcomingRequest?.bookingTime}'),
                ],
              ),
            ),

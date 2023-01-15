@@ -4,20 +4,20 @@ import 'package:provider/provider.dart';
 import '../../screens/provider/provider_services.dart';
 import 'ServiceRequestCard.dart';
 
-class CompletedRequestList extends StatefulWidget {
-  const CompletedRequestList({Key? key}) : super(key: key);
+class CancelledRequestList extends StatefulWidget {
+  const CancelledRequestList({Key? key}) : super(key: key);
 
   @override
-  State<CompletedRequestList> createState() => _CompletedRequestListState();
+  State<CancelledRequestList> createState() => _CancelledRequestListState();
 }
 
-class _CompletedRequestListState extends State<CompletedRequestList> {
+class _CancelledRequestListState extends State<CancelledRequestList> {
   ProviderServices? providerServices;
 
   @override
   void initState() {
     providerServices = Provider.of<ProviderServices>(context, listen: false);
-    providerServices?.completedRequests();
+    providerServices?.canceledRequests();
     super.initState();
   }
 
@@ -26,12 +26,12 @@ class _CompletedRequestListState extends State<CompletedRequestList> {
     return Container(
       child: Consumer<ProviderServices>(
           builder: (_, provider, __) {
-            print('object ${provider.completedRequestModel?.data}');
-            if (provider.completedRequestModel?.message == 'No Data found') {
-              return const Text('No completed Requests');
+            print('object ${provider.canceledRequestModel?.data}');
+            if (provider.canceledRequestModel?.message == 'No Data found') {
+              return  Text('No Cancelled requests');
             } else {
 
-              return Text('completed');
+              return Text('Cancelled requests');
             }
 
           }
