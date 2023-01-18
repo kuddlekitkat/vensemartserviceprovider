@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vensemartserviceprovider/model/upcoming_request.dart';
 
-import '../../screens/AcceptRejectBookingsScreen.dart';
-
 class ServiceRequestCard extends StatelessWidget {
   Data? UpcomingRequest;
   ServiceRequestCard({Key? key, required this.UpcomingRequest}) : super(key: key);
@@ -38,16 +36,8 @@ class ServiceRequestCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children:  [
                   Text('New Service Request'),
-                  // Text('${UpcomingRequest?.name}' ?? ''),
-                  Flexible(
-                    child: RichText(
-                      overflow: TextOverflow.ellipsis,
-                      strutStyle: StrutStyle(fontSize: 40.0),
-                      text: TextSpan(
-                          style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 20),
-                          text: 'From ${UpcomingRequest?.name} '),
-                    ),
-                  ),
+                  Text('${UpcomingRequest?.name}' ?? ''),
+                  Text('From: ${UpcomingRequest?.email}'),
                   Text('${UpcomingRequest?.bookingDate}'),
                   Text('${UpcomingRequest?.bookingTime}'),
                 ],
@@ -59,25 +49,15 @@ class ServiceRequestCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
 
               children: [
-                GestureDetector(
-                  onTap: (){
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => AcceptRejectBookingsScreen(userAddress: '${UpcomingRequest?.userAddress}', bookingId: '${UpcomingRequest?.bookingId}', date: '${UpcomingRequest?.bookingDate}',),
-                      ),
-                    );
-                  },
-                  child: Container(
-                    margin: EdgeInsets.only(bottom: 21.0),
-                    width: MediaQuery.of(context).size.width/3.6,
-                    height: MediaQuery.of(context).size.height/18,
-                    decoration: BoxDecoration(
-                        color: Color(0xff1456f1),
-                        borderRadius: BorderRadius.circular(20.0)
-                    ),
-                    child: Center(child: Text('View',style: TextStyle(color: Colors.white)),),
+                Container(
+                  margin: EdgeInsets.only(bottom: 21.0),
+                  width: MediaQuery.of(context).size.width/3.6,
+                  height: MediaQuery.of(context).size.height/18,
+                  decoration: BoxDecoration(
+                      color: Color(0xff1456f1),
+                      borderRadius: BorderRadius.circular(20.0)
                   ),
+                  child: Center(child: Text('View',style: TextStyle(color: Colors.white)),),
                 )
               ],
             )

@@ -1,11 +1,11 @@
-class UpcomingRequest {
+class CompletedRequestModel {
   int? status;
   String? message;
   List<Data>? data;
 
-  UpcomingRequest({this.status, this.message, this.data});
+  CompletedRequestModel({this.status, this.message, this.data});
 
-  UpcomingRequest.fromJson(Map<String, dynamic> json) {
+  CompletedRequestModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
     if (json['data'] != null) {

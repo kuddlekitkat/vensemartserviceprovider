@@ -73,6 +73,36 @@ class AuthRepo with ApiServices {
     return null;
   }
 
+  Future<Response?> services() async {
+    Response? response = await apiGetRequests("services");
+
+    if (response != null) {
+      return response;
+    }
+
+    return null;
+  }
+
+  Future<Response?> acceptRejectBooking(Map<String, String> credentials) async {
+    Response? response = await apiPostRequests("accept-reject-bookings", credentials);
+
+    if (response != null) {
+      return response;
+    }
+    return null;
+  }
+
+
+  Future<Response?> endBooking(Map<String, String> credentials) async {
+    Response? response = await apiPostRequests("complete-reject-booking", credentials);
+
+    if (response != null) {
+      return response;
+    }
+    return null;
+  }
+
+
   Future<Response?> upcomingRequest() async {
     Response? response = await apiGetRequests("upcomming_request_list",);
 
@@ -82,6 +112,50 @@ class AuthRepo with ApiServices {
 
     return null;
   }
+
+
+  Future<Response?> canceledRequest() async {
+    Response? response = await apiGetRequests("cancel_request_list",);
+
+    if (response != null) {
+      return response;
+    }
+
+    return null;
+  }
+
+  Future<Response?> CompletedRequest() async {
+    Response? response = await apiGetRequests("completed-bookings",);
+
+    if (response != null) {
+      return response;
+    }
+
+    return null;
+  }
+
+  Future<Response?> sendLocation(Map<String, String> credentials) async {
+    Response? response = await apiPostRequests("service-pro-onboarding-2", credentials);
+
+    if (response != null) {
+      return response;
+    }
+    return null;
+  }
+
+
+  Future<Response?> sendServiceId(Map<String, String> credentials) async {
+    Response? response = await apiPostRequests("service-pro-onboarding-1", credentials);
+
+    if (response != null) {
+      return response;
+    }
+
+    return null;
+  }
+
+
+
 
 
   Future<Response?> providerPlans() async {

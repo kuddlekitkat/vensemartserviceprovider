@@ -3,23 +3,23 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 
 import '../../screens/provider/provider_services.dart';
-import 'CompleteRequestCard.dart';
+import 'CancelledRequestCard.dart';
 import 'ServiceRequestCard.dart';
 
-class CompletedRequestList extends StatefulWidget {
-  const CompletedRequestList({Key? key}) : super(key: key);
+class CancelledRequestList extends StatefulWidget {
+  const CancelledRequestList({Key? key}) : super(key: key);
 
   @override
-  State<CompletedRequestList> createState() => _CompletedRequestListState();
+  State<CancelledRequestList> createState() => _CancelledRequestListState();
 }
 
-class _CompletedRequestListState extends State<CompletedRequestList> {
+class _CancelledRequestListState extends State<CancelledRequestList> {
   ProviderServices? providerServices;
 
   @override
   void initState() {
     providerServices = Provider.of<ProviderServices>(context, listen: false);
-    providerServices?.completedRequests();
+    providerServices?.canceledRequests();
     super.initState();
   }
 
@@ -28,17 +28,17 @@ class _CompletedRequestListState extends State<CompletedRequestList> {
     return Container(
       child: Consumer<ProviderServices>(
           builder: (_, provider, __) {
-            print('object ${provider.completedRequestModel?.data}');
-            if (provider.completedRequestModel?.message == null) {
+            print('object ${provider.cancelledRequestModel?.data}');
+            if (provider.cancelledRequestModel?.message == null) {
               return Center(child: SpinKitCircle(color: Colors.blue,));
             } else {
 
               return Column(
                 children: [
-                  ...provider.completedRequestModel!.data!.map((e) {
+                  ...provider.cancelledRequestModel!.data!.map((e) {
                     print('print e for me $e');
-                    return CompletedRequestCard(
-                      CompletedRequestModel : e,
+                    return CancelledRequestCard(
+                      CancelledRequestModel : e,
                     );
 
                   }).toList()

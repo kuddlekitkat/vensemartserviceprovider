@@ -104,12 +104,14 @@ class OnboardingScreen extends StatelessWidget {
                       ),
                     ),
 
-                    Row(
-                      children: [
-                        Text('Don\'t have an account?',style: TextStyle(fontSize: 10.0,color: Colors.blue,fontWeight: FontWeight.bold),),
-                        Text('SIGNUP',style: TextStyle(fontSize: 12.0,color: Colors.blue,fontWeight: FontWeight.bold),),
-                      ],
-                    ),
+                    // Center(
+                    //   child: Row(
+                    //     children: [
+                    //       Text('Don\'t have an account?',style: TextStyle(fontSize: 10.0,color: Colors.blue,fontWeight: FontWeight.bold),),
+                    //       Text('SIGNUP',style: TextStyle(fontSize: 12.0,color: Colors.blue,fontWeight: FontWeight.bold),),
+                    //     ],
+                    //   ),
+                    // ),
 
                   ],
                 ),

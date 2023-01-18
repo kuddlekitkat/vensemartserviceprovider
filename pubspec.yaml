@@ -37,6 +37,7 @@ dependencies:
     sdk: flutter
   flutter_advanced_segment: ^3.0.1
   flutter_config: ^2.0.0
+  maps_launcher: ^2.0.1
   flutter_dotenv: ^5.0.2
   flutter_google_places: ^0.3.0
   flutter_native_splash: ^2.2.14
@@ -50,7 +51,11 @@ dependencies:
   google_maps_webservice: ^0.0.19
   image_cropper: ^3.0.1
   image_picker: ^0.8.6
+  pin_code_fields: ^7.4.0
+  flutter_geocoder: ^0.2.2-nullsafety
   pretty_dio_logger: ^1.1.1
+  firebase_messaging: ^14.2.1
+  firebase_core: ^2.4.1
   provider: ^6.0.4
   shared_preferences: ^2.0.15
 
@@ -76,6 +81,8 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/images/contactus.png
+    - assets/images/flag.png
     - .env
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -38,7 +38,7 @@ class Data {
   String? deviceName;
   String? deviceToken;
   String? apiToken;
-  String? profile;
+  dynamic profile;
   String? status;
   dynamic serviceType;
   dynamic yearExpreance;

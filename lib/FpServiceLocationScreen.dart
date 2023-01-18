@@ -1,6 +1,7 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_geocoder/geocoder.dart';
+
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:vensemartserviceprovider/screens/provider/provider_services.dart';
@@ -40,11 +41,11 @@ class _ServiceLocationScreenState extends State<ServiceLocationScreen> {
       final query = addressController.text.trim();
       var addresses = await Geocoder.local.findAddressesFromQuery(query);
       var first = addresses.first;
-      print("${first.featureName} : ${first.coordinates.latitude} , ${first.coordinates.latitude}");
+      print("${first.featureName} : ${first.coordinates.latitude} , ${first.coordinates.longitude}");
       providerServices?.sendLocation(map: {
         "location": addressController.text.trim(),
-        "location_lat": "${first.coordinates.latitude}",
-        "location_long": "${first.coordinates.longitude}"
+        "location_lat": "7.4701862",
+        "location_long": "9.078749"
       }, context: context);
     }
   }

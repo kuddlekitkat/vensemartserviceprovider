@@ -21,10 +21,10 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
-  TextEditingController ninController = TextEditingController();
-  TextEditingController dobController = TextEditingController();
-  TextEditingController genderController = TextEditingController();
-  TextEditingController addressController = TextEditingController();
+  // TextEditingController ninController = TextEditingController();
+  // TextEditingController dobController = TextEditingController();
+  // TextEditingController genderController = TextEditingController();
+  // TextEditingController addressController = TextEditingController();
 
   final _pickImage = ImagePickerHandler();
   File? fileImage;
@@ -40,6 +40,9 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   void initState() {
     providerServices = Provider.of<ProviderServices>(context, listen: false);
     providerServices?.getUserDetails();
+    nameController.text = providerServices?.userDetailModel?.data?.name ?? '';
+    emailController.text = providerServices?.userDetailModel?.data?.email ?? '';
+    phoneController.text = providerServices?.userDetailModel?.data?.mobile ?? '';
     super.initState();
   }
 
@@ -49,9 +52,9 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         "name": nameController.text.trim(),
         "email": emailController.text.trim(),
         "mobile_number": phoneController.text.trim(),
-        "address": addressController.text.trim(),
-        "gender": genderController.text.trim(),
-        "date_of_birth": dobController.text.trim(),
+        // "address": addressController.text.trim(),
+        // "gender": genderController.text.trim(),
+        // "date_of_birth": dobController.text.trim(),
         "profile": MultipartFile.fromBytes(
             _formartFileImage(fileImage).readAsBytesSync(),
             filename: fileImage!.path.split("/").last),
@@ -143,11 +146,25 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                                         radius: 50,
                                         backgroundImage: FileImage(fileImage!)),
                                   )
-                                : const Center(
+                                :  Center(
                                     child: CircleAvatar(
                                       radius: 50.0,
-                                      backgroundImage:
-                                          AssetImage("assets/images/dp.png"),
+                                      // backgroundImage:
+                                      // NetworkImage("${provider.userDetailModel?.data?.profile}" ?? ''),
+                                      child: CachedNetworkImage(
+                                        imageUrl: provider?.userDetailModel?.data?.profile.toString() ?? '',
+                                        imageBuilder: (context, imageProvider) => Container(
+                                          width: 100.0,
+                                          height: 100.0,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            image: DecorationImage(
+                                                image: imageProvider, fit: BoxFit.cover),
+                                          ),
+                                        ),
+                                        placeholder: (context, url) => CircularProgressIndicator(),
+                                        errorWidget: (context, url, error) => Icon(Icons.error),
+                                      ),
                                     ),
                                   ),
                       ),
@@ -155,7 +172,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                       const Text('Name'),
                       const SizedBox(height: 4.0),
                       TextFormField(
-                        controller: nameController,
+                        controller: nameController..text = providerServices?.userDetailModel?.data?.name ?? '',
                         validator: Validators.validateString(),
                         decoration: InputDecoration(
                             label: Text(
@@ -218,103 +235,113 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                             fillColor: Colors.white),
                       ),
                       const SizedBox(height: 14.0),
-                      const Text('Nin'),
-                      const SizedBox(height: 4.0),
-                      TextFormField(
-                        controller: ninController,
-                        validator: Validators.validateInt(),
-                        decoration: InputDecoration(
-                            border: const OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10.0),
-                              ),
-                              borderSide: BorderSide(
-                                width: 0,
-                                style: BorderStyle.none,
-                              ),
-                            ),
-                            filled: true,
-                            hintStyle: new TextStyle(color: Colors.grey[600]),
-                            fillColor: Colors.white),
-                      ),
-                      const SizedBox(height: 14.0),
-                      const Text('Date of birth'),
-                      const SizedBox(height: 4.0),
-                      TextFormField(
-                        controller: dobController,
-                        validator: Validators.validateString(),
-                        decoration: InputDecoration(
-                            border: const OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10.0),
-                              ),
-                              borderSide: BorderSide(
-                                width: 0,
-                                style: BorderStyle.none,
-                              ),
-                            ),
-                            filled: true,
-                            hintStyle: new TextStyle(color: Colors.grey[600]),
-                            fillColor: Colors.white),
-                      ),
-                      const SizedBox(height: 14.0),
-                      const Text('Gender'),
-                      const SizedBox(height: 4.0),
-                      TextFormField(
-                        controller: genderController,
-                        validator: Validators.validateString(),
-                        decoration: InputDecoration(
-                            border: const OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10.0),
-                              ),
-                              borderSide: BorderSide(
-                                width: 0,
-                                style: BorderStyle.none,
-                              ),
-                            ),
-                            filled: true,
-                            hintStyle: new TextStyle(color: Colors.grey[600]),
-                            fillColor: Colors.white),
-                      ),
-                      const SizedBox(height: 14.0),
-                      const Text('Address'),
-                      const SizedBox(height: 4.0),
-                      TextFormField(
-                        controller: addressController,
-                        validator: Validators.validateString(),
-                        decoration: InputDecoration(
-                            border: const OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10.0),
-                              ),
-                              borderSide: BorderSide(
-                                width: 0,
-                                style: BorderStyle.none,
-                              ),
-                            ),
-                            filled: true,
-                            hintStyle: new TextStyle(color: Colors.grey[600]),
-                            fillColor: Colors.white),
-                      ),
+                      // const Text('Nin'),
+                      // const SizedBox(height: 4.0),
+                      // TextFormField(
+                      //   controller: ninController,
+                      //   validator: Validators.validateInt(),
+                      //   decoration: InputDecoration(
+                      //       border: const OutlineInputBorder(
+                      //         borderRadius: BorderRadius.all(
+                      //           Radius.circular(10.0),
+                      //         ),
+                      //         borderSide: BorderSide(
+                      //           width: 0,
+                      //           style: BorderStyle.none,
+                      //         ),
+                      //       ),
+                      //       filled: true,
+                      //       hintStyle: new TextStyle(color: Colors.grey[600]),
+                      //       fillColor: Colors.white),
+                      // ),
+                      // const SizedBox(height: 14.0),
+                      // const Text('Date of birth'),
+                      // const SizedBox(height: 4.0),
+                      // TextFormField(
+                      //   controller: dobController,
+                      //   validator: Validators.validateString(),
+                      //   decoration: InputDecoration(
+                      //       border: const OutlineInputBorder(
+                      //         borderRadius: BorderRadius.all(
+                      //           Radius.circular(10.0),
+                      //         ),
+                      //         borderSide: BorderSide(
+                      //           width: 0,
+                      //           style: BorderStyle.none,
+                      //         ),
+                      //       ),
+                      //       filled: true,
+                      //       hintStyle: new TextStyle(color: Colors.grey[600]),
+                      //       fillColor: Colors.white),
+                      // ),
+                      // const SizedBox(height: 14.0),
+                      // const Text('Gender'),
+                      // const SizedBox(height: 4.0),
+                      // TextFormField(
+                      //   controller: genderController,
+                      //   validator: Validators.validateString(),
+                      //   decoration: InputDecoration(
+                      //       border: const OutlineInputBorder(
+                      //         borderRadius: BorderRadius.all(
+                      //           Radius.circular(10.0),
+                      //         ),
+                      //         borderSide: BorderSide(
+                      //           width: 0,
+                      //           style: BorderStyle.none,
+                      //         ),
+                      //       ),
+                      //       filled: true,
+                      //       hintStyle: new TextStyle(color: Colors.grey[600]),
+                      //       fillColor: Colors.white),
+                      // ),
+                      // const SizedBox(height: 14.0),
+                      // const Text('Address'),
+                      // const SizedBox(height: 4.0),
+                      // TextFormField(
+                      //   controller: addressController,
+                      //   validator: Validators.validateString(),
+                      //   decoration: InputDecoration(
+                      //       border: const OutlineInputBorder(
+                      //         borderRadius: BorderRadius.all(
+                      //           Radius.circular(10.0),
+                      //         ),
+                      //         borderSide: BorderSide(
+                      //           width: 0,
+                      //           style: BorderStyle.none,
+                      //         ),
+                      //       ),
+                      //       filled: true,
+                      //       hintStyle: new TextStyle(color: Colors.grey[600]),
+                      //       fillColor: Colors.white),
+                      // ),
                       const SizedBox(
                         height: 30.0,
                       ),
                       Center(
-                        child: GestureDetector(
+                        child:    GestureDetector(
                           onTap: () => updateProfile(context),
-                          child: Container(
-                            height: MediaQuery.of(context).size.height / 15,
-                            width: MediaQuery.of(context).size.width / 1.1,
-                            decoration: BoxDecoration(
-                              color: const Color(0xff1456f1),
-                              borderRadius: BorderRadius.circular(60.0),
-                            ),
-                            child: const Center(
-                              child: Text(
-                                'Update Profile',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 22),
+                          child: Consumer<ProviderServices>(
+                            builder: (_, value, __) => Center(
+                              child: Container(
+                                height: MediaQuery.of(context).size.height / 14,
+                                width: MediaQuery.of(context).size.width / 1.10,
+                                decoration: BoxDecoration(
+                                  color: const Color(0xff1456f1),
+                                  borderRadius: BorderRadius.circular(90.0),
+                                ),
+                                child: value.isLoading == true
+                                    ? const SpinKitCircle(
+                                  color: Colors.white,
+                                )
+                                    : const Center(
+                                  child: Text(
+                                    'update Profile',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20.0,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
                               ),
                             ),
                           ),

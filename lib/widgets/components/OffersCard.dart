@@ -24,7 +24,7 @@ class OffersCard extends StatelessWidget {
         children: [
           Container(
             height: screenHeight/8,
-            width: screenWidth/4,
+            width: screenWidth/4.6,
             margin: EdgeInsets.only(right: 14),
             decoration: BoxDecoration(
               color: Color(0xff1456f1),
@@ -40,7 +40,7 @@ class OffersCard extends StatelessWidget {
 
 
           Container(
-            margin: EdgeInsets.only(left: 4.0),
+
             height:screenHeight/8,
             width: screenHeight/3.5,
             decoration: BoxDecoration(
@@ -50,7 +50,10 @@ class OffersCard extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Get 10% discount for  exciting customers and many more discounts on the way",style: TextStyle(fontSize: 12,color: Colors.black),),
+                Flexible(
+                  child: Text("Get 10% discount for  exciting customers and many "
+                      "more discounts on the way",style: TextStyle(fontSize: 10,color: Colors.black),),
+                ),
               ],
             ),
           ),

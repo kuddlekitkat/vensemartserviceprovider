@@ -88,19 +88,24 @@ class ImagePickerHandler {
     switch (action!) {
       case ProfileOptionAction.viewImage:
       case ProfileOptionAction.library:
-        return _getImage(context, ImageSource.gallery);
+        return _getImage(context, ImageSource.gallery, maxHeight: 200,
+            maxWidth: 200,
+            imageQuality: 50 );
       case ProfileOptionAction.profileCamera:
-        return _getImage(context, ImageSource.camera);
+        return _getImage(context, ImageSource.camera,maxHeight: 200,
+            maxWidth: 200,
+            imageQuality: 50);
       case ProfileOptionAction.remove:
         break;
     }
     return null;
   }
 
-  Future<File?> _getImage(BuildContext context, ImageSource source) async {
+  Future<File?> _getImage(BuildContext context, ImageSource source, {required int maxHeight, required int maxWidth, required int imageQuality}) async {
     try {
       final pickedFile = await ImagePicker.platform.pickImage(source: source);
       if (pickedFile != null) {
+
         return await _cropImage(context, pickedFile);
       }
     } catch (e) {
@@ -113,11 +118,11 @@ class ImagePickerHandler {
     CroppedFile? croppedFile = await ImageCropper().cropImage(
         sourcePath: imageFile.path,
         aspectRatioPresets: Platform.isAndroid
-            ? [CropAspectRatioPreset.square]
+            ? [CropAspectRatioPreset.ratio16x9]
             : [CropAspectRatioPreset.square],
         uiSettings: [
           AndroidUiSettings(
-              toolbarTitle: 'Vense Mart',
+              toolbarTitle: 'VenseMart',
               toolbarColor: Colors.blue[900],
               toolbarWidgetColor: Colors.white,
               initAspectRatio: CropAspectRatioPreset.original,

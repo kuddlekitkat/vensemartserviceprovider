@@ -1,3 +1,5 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_config/flutter_config.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -26,7 +28,10 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initializeCore();
   await FlutterConfig.loadEnvVariables();
+  Firebase.initializeApp();
   runApp(const MyApp());
+
+
 }
 
 class MyApp extends StatelessWidget {
@@ -44,7 +49,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         home: SessionManager.instance.authToken.isNotEmpty
-            ? const LoginScreen()
+            ? const ServiceProviderHomeScreen()
             : const OnboardingScreen(),
         routes: {
           // ServicesHomeScreen.routeName: (ctx) => ServicesHomeScreen(),
