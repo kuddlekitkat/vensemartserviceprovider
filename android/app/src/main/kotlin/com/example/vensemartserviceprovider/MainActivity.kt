@@ -1,4 +1,4 @@
-package com.example.vensemartserviceprovider
+package com.vensemart.vensemartserviceprovider
 
 import io.flutter.embedding.android.FlutterActivity
 

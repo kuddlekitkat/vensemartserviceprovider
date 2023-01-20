@@ -6,20 +6,30 @@ import 'package:vensemartserviceprovider/widgets/AppBars/ServiceProviderHomeAppB
 import 'package:vensemartserviceprovider/widgets/Drawers/ServiceProviderHomeDrawer.dart';
 import 'package:vensemartserviceprovider/widgets/full_page/ServiceProviderHome.dart';
 
+import '../firebase_services/firebase_services_class.dart';
 import '../widgets/AppBars/ProfileAppBar.dart';
 import '../widgets/AppBars/RequestAppBar.dart';
 
-
-
-class ServiceProviderHomeScreen extends StatelessWidget {
+class ServiceProviderHomeScreen extends StatefulWidget {
   const ServiceProviderHomeScreen({super.key});
   static const routeName = '/home';
   static const String _title = 'Flutter Code Sample';
 
   @override
+  State<ServiceProviderHomeScreen> createState() => _ServiceProviderHomeScreenState();
+}
+
+class _ServiceProviderHomeScreenState extends State<ServiceProviderHomeScreen> {
+
+  @override
+  void initState() {
+    firebaseService.firebasePushNotification(context);
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      title: _title,
+      title: ServiceProviderHomeScreen._title,
       debugShowCheckedModeBanner: false,
       home: MyStatefulWidget(),
     );

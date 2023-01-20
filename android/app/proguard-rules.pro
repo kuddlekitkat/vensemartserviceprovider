@@ -1,1 +1,1 @@
--keep class com.example.vensemartserviceprovider.BuildConfig { *; }
+-keep class com.vensemart.vensemartserviceprovider.BuildConfig { *; }
