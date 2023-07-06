@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:vensemartserviceprovider/screens/provider/provider_services.dart';
 import 'package:vensemartserviceprovider/widgets/components/SubscriptionCard.dart';
@@ -19,6 +20,7 @@ class _SubscriptionPlanListScreenState
   void initState() {
     providerServices = Provider.of<ProviderServices>(context, listen: false);
     providerServices?.serviceproviderplans();
+    providerServices?.getUserDetails();
     super.initState();
   }
 
@@ -58,7 +60,7 @@ class _SubscriptionPlanListScreenState
                 builder: (_, provider, __) {
                   print('object ${provider.serviceProviderPlans?.data}');
                   if (provider.serviceProviderPlans?.data == null) {
-                    return const CircularProgressIndicator();
+                    return Center(child: SpinKitCircle(color: Colors.blue,));
                   } else {
                     return Column(
                       children: [
@@ -66,7 +68,8 @@ class _SubscriptionPlanListScreenState
                           print('print e for me $e');
                           return SubscriptionCard(
                             servicesProviderPlans: e,
-                            loginModel: provider.loginModel,
+                            loginModel : provider.loginModel,
+                            userDetailsModel: provider.userDetailModel,
 
                           );
                         }).toList()

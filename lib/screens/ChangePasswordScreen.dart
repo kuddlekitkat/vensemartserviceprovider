@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
   const ChangePasswordScreen({Key? key}) : super(key: key);
@@ -13,12 +14,12 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-        backgroundColor: Color.fromRGBO(234, 234, 234, 1),
+        backgroundColor: const Color.fromRGBO(234, 234, 234, 1),
         appBar: AppBar(
-          backgroundColor: Color(0xff1456f1),
-          title:  Text("Change Password"),
-          leading:  IconButton(
-            icon:  CircleAvatar(
+          backgroundColor: const Color(0xff1456f1),
+          title: const Text("Change Password"),
+          leading: IconButton(
+            icon: CircleAvatar(
               radius: 20,
               backgroundColor: Colors.white,
               child: Center(
@@ -41,12 +42,12 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('old password'),
-              SizedBox(height: 4.0),
+              const AutoSizeText('old password'),
+              const SizedBox(height: 4.0),
               TextField(
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: const BorderRadius.all(
+                    border: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
                         Radius.circular(10.0),
                       ),
                       borderSide: BorderSide(
@@ -55,13 +56,30 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       ),
                     ),
                     filled: true,
-                    hintStyle: new TextStyle(color: Colors.grey[600]),
+                    hintStyle: TextStyle(color: Colors.grey[600]),
                     fillColor: Colors.white),
-
               ),
-              SizedBox(height: 14.0),
-              Text('new password'),
-              SizedBox(height: 4.0),
+              const SizedBox(height: 14.0),
+              const AutoSizeText('new password'),
+              const SizedBox(height: 4.0),
+              TextFormField(
+                decoration: InputDecoration(
+                    border: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10.0),
+                      ),
+                      borderSide: BorderSide(
+                        width: 0,
+                        style: BorderStyle.none,
+                      ),
+                    ),
+                    filled: true,
+                    hintStyle: TextStyle(color: Colors.grey[600]),
+                    fillColor: Colors.white),
+              ),
+              const SizedBox(height: 14.0),
+              const AutoSizeText('confirm password'),
+              const SizedBox(height: 4.0),
               TextFormField(
                 decoration: InputDecoration(
                     border: const OutlineInputBorder(
@@ -76,52 +94,30 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     filled: true,
                     hintStyle: new TextStyle(color: Colors.grey[600]),
                     fillColor: Colors.white),
-
               ),
-              SizedBox(height: 14.0),
-              Text('confirm password'),
-              SizedBox(height: 4.0),
-              TextFormField(
-                decoration: InputDecoration(
-                    border: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10.0),
-                      ),
-                      borderSide: BorderSide(
-                        width: 0,
-                        style: BorderStyle.none,
-                      ),
-                    ),
-                    filled: true,
-                    hintStyle: new TextStyle(color: Colors.grey[600]),
-                    fillColor: Colors.white),
-
+              const SizedBox(
+                height: 40.0,
               ),
-
-
-
-
-              SizedBox(height: 40.0,),
-
-
-
               Center(
                 child: Container(
-                  height: MediaQuery.of(context).size.height/13,
+                  height: MediaQuery.of(context).size.height / 13,
                   width: MediaQuery.of(context).size.width / 1.1,
                   decoration: BoxDecoration(
                     color: Color(0xff1456f1),
                     borderRadius: BorderRadius.circular(60.0),
                   ),
-                  child: const Center(
-                    child: Text( 'Change password',style: TextStyle(color: Colors.white,fontSize: 22),),
-
+                  child: Center(
+                    child: Text(
+                      'Change password',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize:
+                              2.3 * MediaQuery.of(context).size.height * 0.01),
+                    ),
                   ),
                 ),
               )
             ],
-
-
           ),
         ),
       ),

@@ -1,17 +1,23 @@
 import 'dart:math';
-
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_paystack/flutter_paystack.dart';
 import 'package:vensemartserviceprovider/model/login_model.dart' as login;
-
+import 'package:vensemartserviceprovider/model/user_details_model.dart'
+    as userdetail;
 import '../../model/service_provider_plans.dart';
 
 class SubscriptionCard extends StatefulWidget {
-  SubscriptionCard({Key? key, this.servicesProviderPlans, this.loginModel})
+  SubscriptionCard(
+      {Key? key,
+      this.servicesProviderPlans,
+      this.loginModel,
+      this.userDetailsModel})
       : super(key: key);
   Data? servicesProviderPlans;
   login.LoginModel? loginModel;
+  userdetail.UserDetailsModel? userDetailsModel;
 
   @override
   State<SubscriptionCard> createState() => _SubscriptionCardState();
@@ -24,15 +30,14 @@ class _SubscriptionCardState extends State<SubscriptionCard> {
     await dotenv.load(fileName: '.env');
     String? publicKey = dotenv.env['PUBLIC_KEY'];
     payStackClient.initialize(publicKey: publicKey!);
-    
   }
 
   final snackBarSuccess = const SnackBar(
-    content: Text('Payment Successful, Thanks for your patronage !'),
+    content: AutoSizeText('Payment Successful, Thanks for your patronage !'),
   );
 
   final snackBarFailure = const SnackBar(
-    content: Text('Payment Unsuccessful, Please Try Again.'),
+    content: AutoSizeText('Payment Unsuccessful, Please Try Again.'),
   );
 
   final String reference =
@@ -41,7 +46,7 @@ class _SubscriptionCardState extends State<SubscriptionCard> {
   void _makePayment(int amount) async {
     final Charge charge = Charge()
       ..amount = amount * 100
-      ..email = widget.loginModel?.data?.email
+      ..email = widget.userDetailsModel?.data?.email
       ..reference = reference;
 
     final CheckoutResponse response = await payStackClient.checkout(context,

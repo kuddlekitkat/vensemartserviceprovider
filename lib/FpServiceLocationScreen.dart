@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:geocode/geocode.dart';
 import 'package:provider/provider.dart';
@@ -13,17 +13,12 @@ class ServiceLocationScreen extends StatefulWidget {
 }
 
 class _ServiceLocationScreenState extends State<ServiceLocationScreen> {
-
-
   ProviderServices? providerServices;
   TextEditingController controller = TextEditingController();
   String _query = '';
   List searchItem = [];
 
   int intval = 0;
-
-
-
 
   @override
   void initState() {
@@ -33,23 +28,19 @@ class _ServiceLocationScreenState extends State<ServiceLocationScreen> {
     super.initState();
   }
 
-
   void sendLocation(context) async {
     GeoCode geoCode = GeoCode();
     if (true) {
-
       final query = addressController.text.trim();
-      var addresses = await geoCode.forwardGeocoding(
-        address:query);
+      var addresses = await geoCode.forwardGeocoding(address: query);
       print("${addresses.latitude} : ${addresses.longitude}");
       providerServices?.sendLocation(map: {
         "location": addressController.text.trim(),
         "location_lat": addresses.latitude.toString(),
-        "location_long":addresses.longitude.toString()
+        "location_long": addresses.longitude.toString()
       }, context: context);
     }
   }
-
 
   // Future<void> printLatLong() async {
   //   final query = addressController.text.trim();
@@ -63,8 +54,6 @@ class _ServiceLocationScreenState extends State<ServiceLocationScreen> {
 
   @override
   Widget build(BuildContext context) {
-
-
     final List<String> items = [
       'Item1',
       'Item2',
@@ -143,26 +132,31 @@ class _ServiceLocationScreenState extends State<ServiceLocationScreen> {
           children: [
             Container(
               alignment: Alignment.centerLeft,
-              margin: EdgeInsets.only(left: 12.0,bottom: 4.0),
-              child: Text('Address Details',style: TextStyle(fontWeight:FontWeight.bold,fontSize: 40,color: Colors.white),),
+              margin: EdgeInsets.only(left: 12.0, bottom: 4.0),
+              child: AutoSizeText(
+                'Address Details',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 3 * MediaQuery.of(context).size.height * 0.01,
+                    color: Colors.white),
+              ),
             ),
-
-
-
             Container(
-              height: MediaQuery.of(context).size.height/1.8,
+              height: MediaQuery.of(context).size.height / 1.8,
               width: double.infinity,
               decoration: const BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(40.0),
-                  topRight: Radius.circular(40.0),),),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(40.0),
+                  topRight: Radius.circular(40.0),
+                ),
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 25.0,),
-
-
-
+                  SizedBox(
+                    height: 25.0,
+                  ),
 
                   // Container(
                   //   decoration: BoxDecoration(
@@ -226,15 +220,9 @@ class _ServiceLocationScreenState extends State<ServiceLocationScreen> {
                           hintText: 'Enter Address',
                           prefixIcon: Icon(Icons.location_on),
                           hintStyle: new TextStyle(color: Colors.grey[600]),
-                          fillColor: Color.fromRGBO(250,250,254,1)),
+                          fillColor: Color.fromRGBO(250, 250, 254, 1)),
                     ),
                   ),
-
-
-
-
-
-
 
                   GestureDetector(
                     onTap: () => sendLocation(context),
@@ -249,32 +237,28 @@ class _ServiceLocationScreenState extends State<ServiceLocationScreen> {
                           ),
                           child: value.isLoading == true
                               ? const SpinKitCircle(
-                            color: Colors.white,
-                          )
-                              : const Center(
-                            child: Text(
-                              'Proceed',
-                              style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 20.0,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
+                                )
+                              : Center(
+                                  child: Text(
+                                    'Proceed',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        //ios : 1.5
+                                        fontSize: 2.0 *
+                                            MediaQuery.of(context).size.height *
+                                            0.01,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
                         ),
                       ),
                     ),
                   ),
-
-
-
-
                 ],
               ),
             ),
-
           ],
-        )
-
-    );
+        ));
   }
 }

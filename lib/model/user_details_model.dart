@@ -48,9 +48,9 @@ class Data {
   String? idProf;
   String? documentsApproved;
   dynamic isOnline;
-  String? whatApp;
-  String? sms;
-  String? notification;
+  dynamic whatApp;
+  dynamic sms;
+  dynamic notification;
   String? serviceTypePrice;
   dynamic guarantorName;
   dynamic guarantorEmail;
@@ -59,10 +59,11 @@ class Data {
   dynamic serviceDiscription;
   dynamic state;
   dynamic town;
-  String? gpsLocationStatus;
-  String? isPhoneVerified;
+  dynamic gpsLocationStatus;
+  dynamic isPhoneVerified;
   String? createdAt;
   String? updatedAt;
+  String? level;
 
   Data(
       {this.id,
@@ -104,7 +105,9 @@ class Data {
       this.gpsLocationStatus,
       this.isPhoneVerified,
       this.createdAt,
-      this.updatedAt});
+      this.updatedAt,
+        this.level,
+      });
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -147,6 +150,7 @@ class Data {
     isPhoneVerified = json['is_phone_verified'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    level = json['level'];
   }
 
   Map<String, dynamic> toJson() {
@@ -191,6 +195,7 @@ class Data {
     data['is_phone_verified'] = isPhoneVerified;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
+    data['level'] = level;
     return data;
   }
 }

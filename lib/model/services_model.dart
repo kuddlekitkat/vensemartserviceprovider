@@ -30,7 +30,7 @@ class ServicesModel {
 }
 
 class Data {
-  String? id;
+  dynamic id;
   String? categoryIcon;
   String? categoryName;
   String? createdAt;

@@ -3,6 +3,7 @@ import 'package:vensemartserviceprovider/screens/ChangePasswordScreen.dart';
 import 'package:vensemartserviceprovider/screens/Enable2FAuthScreen.dart';
 import 'package:vensemartserviceprovider/screens/ServiceProviderConnectedDevices.dart';
 import 'package:vensemartserviceprovider/widgets/components/SecurityCard.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class ServiceProviderSecurityScreen extends StatelessWidget {
   const ServiceProviderSecurityScreen({Key? key}) : super(key: key);
@@ -15,9 +16,9 @@ class ServiceProviderSecurityScreen extends StatelessWidget {
         backgroundColor: Color.fromRGBO(234, 234, 234, 2),
         appBar: AppBar(
           backgroundColor: Color(0xff1456f1),
-          title:  Text("Security"),
-          leading:  IconButton(
-            icon:  CircleAvatar(
+          title: Text("Security"),
+          leading: IconButton(
+            icon: CircleAvatar(
               radius: 20,
               backgroundColor: Colors.white,
               child: Center(
@@ -42,7 +43,7 @@ class ServiceProviderSecurityScreen extends StatelessWidget {
               Center(
                 child: Container(
                   height: MediaQuery.of(context).size.height / 10,
-                  width: MediaQuery.of(context).size.width /1.08,
+                  width: MediaQuery.of(context).size.width / 1.08,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(12.0),
@@ -50,57 +51,60 @@ class ServiceProviderSecurityScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-
                       Row(
                         children: [
-
                           SizedBox(width: 13.0),
-                          Icon(Icons.home,color: Colors.black,),
+                          Icon(
+                            Icons.home,
+                            color: Colors.black,
+                          ),
                           SizedBox(width: 13.0),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Change Password',style: TextStyle(color: Colors.black,fontSize: 19),),
-                              Text('Secure your account',style: TextStyle(color: Colors.grey)),
+                              AutoSizeText(
+                                'Change Password',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 2 *
+                                        MediaQuery.of(context).size.height *
+                                        0.01),
+                              ),
+                              AutoSizeText('Secure your account',
+                                  style: TextStyle(color: Colors.grey)),
                             ],
                           ),
-
                         ],
                       ),
-
-
                       GestureDetector(
-                        onTap: (){
-
+                        onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => ChangePasswordScreen(),
                             ),
                           );
-
                         },
                         child: Padding(
                           padding: const EdgeInsets.only(right: 19.0),
-                          child: Icon(Icons.keyboard_arrow_right,color: Colors.black,),
+                          child: Icon(
+                            Icons.keyboard_arrow_right,
+                            color: Colors.black,
+                          ),
                         ),
                       ),
-
-
                     ],
                   ),
-
-
-
                 ),
               ),
-
-              SizedBox(height: 10.0,),
+              SizedBox(
+                height: 10.0,
+              ),
               Center(
                 child: Container(
                   height: MediaQuery.of(context).size.height / 10,
-                  width: MediaQuery.of(context).size.width /1.08,
+                  width: MediaQuery.of(context).size.width / 1.08,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(12.0),
@@ -108,57 +112,60 @@ class ServiceProviderSecurityScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-
                       Row(
                         children: [
-
                           SizedBox(width: 13.0),
-                          Icon(Icons.home,color: Colors.black,),
+                          Icon(
+                            Icons.home,
+                            color: Colors.black,
+                          ),
                           SizedBox(width: 13.0),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('2 factor authentication',style: TextStyle(color: Colors.black,fontSize: 19),),
-                              Text('Secure your account',style: TextStyle(color: Colors.grey)),
+                              AutoSizeText(
+                                '2 factor authentication',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 2 *
+                                        MediaQuery.of(context).size.height *
+                                        0.01),
+                              ),
+                              AutoSizeText('Secure your account',
+                                  style: TextStyle(color: Colors.grey)),
                             ],
                           ),
-
                         ],
                       ),
-
-
                       GestureDetector(
-                        onTap: (){
-
+                        onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => Enable2FAuthScreen(),
                             ),
                           );
-
                         },
                         child: Padding(
                           padding: const EdgeInsets.only(right: 19.0),
-                          child: Icon(Icons.keyboard_arrow_right,color: Colors.black,),
+                          child: Icon(
+                            Icons.keyboard_arrow_right,
+                            color: Colors.black,
+                          ),
                         ),
                       ),
-
-
                     ],
                   ),
-
-
-
                 ),
               ),
-
-              SizedBox(height: 10.0,),
+              SizedBox(
+                height: 10.0,
+              ),
               Center(
                 child: Container(
                   height: MediaQuery.of(context).size.height / 10,
-                  width: MediaQuery.of(context).size.width /1.08,
+                  width: MediaQuery.of(context).size.width / 1.08,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(12.0),
@@ -166,55 +173,55 @@ class ServiceProviderSecurityScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-
                       Row(
                         children: [
-
                           SizedBox(width: 13.0),
-                          Icon(Icons.home,color: Colors.black,),
+                          Icon(
+                            Icons.home,
+                            color: Colors.black,
+                          ),
                           SizedBox(width: 13.0),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Text('Connected Devices',style: TextStyle(color: Colors.black,fontSize: 19),),
-                              Text('Secure your account',style: TextStyle(color: Colors.grey)),
+                            children: [
+                              AutoSizeText(
+                                'Connected Devices',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 2 *
+                                        MediaQuery.of(context).size.height *
+                                        0.01),
+                              ),
+                              AutoSizeText('Secure your account',
+                                  style: TextStyle(color: Colors.grey)),
                             ],
                           ),
-
                         ],
                       ),
-
-
                       GestureDetector(
-                        onTap: (){
-
+                        onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => ServiceProviderConnectedDevices(),
+                              builder: (context) =>
+                                  ServiceProviderConnectedDevices(),
                             ),
                           );
-
                         },
                         child: Padding(
                           padding: const EdgeInsets.only(right: 19.0),
-                          child: Icon(Icons.keyboard_arrow_right,color: Colors.black,),
+                          child: Icon(
+                            Icons.keyboard_arrow_right,
+                            color: Colors.black,
+                          ),
                         ),
                       ),
-
-
                     ],
                   ),
-
-
-
                 ),
               ),
-
-
             ],
-
           ),
         ),
       ),

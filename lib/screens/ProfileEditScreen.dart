@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -42,23 +42,36 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
     providerServices?.getUserDetails();
     nameController.text = providerServices?.userDetailModel?.data?.name ?? '';
     emailController.text = providerServices?.userDetailModel?.data?.email ?? '';
-    phoneController.text = providerServices?.userDetailModel?.data?.mobile ?? '';
+    phoneController.text =
+        providerServices?.userDetailModel?.data?.mobile ?? '';
     super.initState();
   }
 
   void updateProfile(context) async {
     if (_globalFormKey.currentState!.validate()) {
-      providerServices?.updateProfile(credentials: {
-        "name": nameController.text.trim(),
-        "email": emailController.text.trim(),
-        "mobile_number": phoneController.text.trim(),
-        // "address": addressController.text.trim(),
-        // "gender": genderController.text.trim(),
-        // "date_of_birth": dobController.text.trim(),
-        "profile": MultipartFile.fromBytes(
-            _formartFileImage(fileImage).readAsBytesSync(),
-            filename: fileImage!.path.split("/").last),
-      }, context: context);
+      if (fileImage != null) {
+        providerServices?.updateProfile(credentials: {
+          "name": nameController.text.trim(),
+          "email": emailController.text.trim(),
+          "mobile_number": phoneController.text.trim(),
+          // "address": addressController.text.trim(),
+          // "gender": genderController.text.trim(),
+          // "date_of_birth": dobController.text.trim(),
+          "profile": MultipartFile.fromBytes(
+              _formartFileImage(fileImage).readAsBytesSync(),
+              filename: fileImage!.path.split("/").last),
+        }, context: context);
+      } else {
+        providerServices?.changeCredentials(map: {
+          "name": nameController.text.trim(),
+          "email": emailController.text.trim(),
+          "mobile_number": phoneController.text.trim(),
+
+          // "address": addressController.text.trim(),
+          // "gender": genderController.text.trim(),
+          // "date_of_birth": dobController.text.trim(),
+        }, context: context);
+      }
     }
   }
 
@@ -106,7 +119,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
           child: Consumer<ProviderServices>(
             builder: (_, provider, __) {
               if (provider.userDetailModel == null) {
-                return  Center(
+                return Center(
                   child: SpinKitCircle(
                     color: Colors.blue[900],
                   ),
@@ -121,62 +134,76 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                       const SizedBox(height: 4.0),
                       GestureDetector(
                         onTap: () => _getImage(context),
-                        child: 
-                        // provider.userDetailModel!.data!.profile != null
-                        //     ? Center(
-                        //         child: CachedNetworkImage(
-                        //           imageUrl:
-                        //               provider.userDetailModel!.data!.profile!,
-                        //           placeholder: (
-                        //             context,
-                        //             url,
-                        //           ) =>
-                        //               Container(
-                        //                   margin: const EdgeInsets.all(10),
-                        //                   child: const SpinKitCircle(
-                        //                     color: Colors.grey,
-                        //                   )),
-                        //           errorWidget: (context, url, error) =>
-                        //               const Icon(Icons.error),
-                        //         ),
-                        //       ):
-                             fileImage != null
+                        child:
+                            // provider.userDetailModel!.data!.profile != null
+                            //     ? Center(
+                            //         child: CachedNetworkImage(
+                            //           imageUrl:
+                            //               provider.userDetailModel!.data!.profile!,
+                            //           placeholder: (
+                            //             context,
+                            //             url,
+                            //           ) =>
+                            //               Container(
+                            //                   margin: const EdgeInsets.all(10),
+                            //                   child: const SpinKitCircle(
+                            //                     color: Colors.grey,
+                            //                   )),
+                            //           errorWidget: (context, url, error) =>
+                            //               const Icon(Icons.error),
+                            //         ),
+                            //       ):
+                            fileImage != null
                                 ? Center(
                                     child: CircleAvatar(
                                         radius: 50,
                                         backgroundImage: FileImage(fileImage!)),
                                   )
-                                :  Center(
+                                : Center(
                                     child: CircleAvatar(
                                       radius: 50.0,
                                       // backgroundImage:
                                       // NetworkImage("${provider.userDetailModel?.data?.profile}" ?? ''),
                                       child: CachedNetworkImage(
-                                        imageUrl: provider?.userDetailModel?.data?.profile.toString() ?? '',
-                                        imageBuilder: (context, imageProvider) => Container(
-                                          width: 100.0,
-                                          height: 100.0,
+                                        imageUrl: provider
+                                                ?.userDetailModel?.data?.profile
+                                                .toString() ??
+                                            '',
+                                        imageBuilder:
+                                            (context, imageProvider) =>
+                                                Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              3,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              3,
                                           decoration: BoxDecoration(
                                             shape: BoxShape.circle,
                                             image: DecorationImage(
-                                                image: imageProvider, fit: BoxFit.cover),
+                                                image: imageProvider,
+                                                fit: BoxFit.cover),
                                           ),
                                         ),
-                                        placeholder: (context, url) => CircularProgressIndicator(),
-                                        errorWidget: (context, url, error) => Icon(Icons.error),
+                                        placeholder: (context, url) =>
+                                            CircularProgressIndicator(),
+                                        errorWidget: (context, url, error) =>
+                                            const Icon(Icons.error),
                                       ),
                                     ),
                                   ),
                       ),
                       const SizedBox(height: 10.0),
-                      const Text('Name'),
+                      const AutoSizeText('Name'),
                       const SizedBox(height: 4.0),
                       TextFormField(
-                        controller: nameController..text = providerServices?.userDetailModel?.data?.name ?? '',
+                        controller: nameController,
                         validator: Validators.validateString(),
                         decoration: InputDecoration(
-                            label: Text(
-                                provider.userDetailModel?.data?.name ?? ''),
+                            // label: Text(
+                            //     provider.userDetailModel?.data?.name ?? ''),
                             border: const OutlineInputBorder(
                               borderRadius: BorderRadius.all(
                                 Radius.circular(10.0),
@@ -187,18 +214,18 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                               ),
                             ),
                             filled: true,
-                            hintStyle: new TextStyle(color: Colors.grey[600]),
+                            hintStyle: TextStyle(color: Colors.grey[600]),
                             fillColor: Colors.white),
                       ),
                       const SizedBox(height: 14.0),
-                      const Text('Email'),
+                      const AutoSizeText('Email'),
                       const SizedBox(height: 4.0),
                       TextFormField(
                         controller: emailController,
                         validator: Validators.validateEmail(),
                         decoration: InputDecoration(
-                            label: Text(
-                                provider.userDetailModel?.data?.email ?? ''),
+                            // label: Text(
+                            //     provider.userDetailModel?.data?.email ?? ''),
                             border: const OutlineInputBorder(
                               borderRadius: BorderRadius.all(
                                 Radius.circular(10.0),
@@ -213,14 +240,14 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                             fillColor: Colors.white),
                       ),
                       const SizedBox(height: 14.0),
-                      const Text('Mobile Number'),
+                      const AutoSizeText('Mobile Number'),
                       const SizedBox(height: 4.0),
                       TextFormField(
                         controller: phoneController,
                         validator: Validators.validatePhone(),
                         decoration: InputDecoration(
-                            label: Text(
-                                provider.userDetailModel?.data?.mobile ?? ''),
+                            // label: Text(
+                            //     provider.userDetailModel?.data?.mobile ?? ''),
                             border: const OutlineInputBorder(
                               borderRadius: BorderRadius.all(
                                 Radius.circular(10.0),
@@ -235,7 +262,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                             fillColor: Colors.white),
                       ),
                       const SizedBox(height: 14.0),
-                      // const Text('Nin'),
+                      // const AutoSizeText('Nin'),
                       // const SizedBox(height: 4.0),
                       // TextFormField(
                       //   controller: ninController,
@@ -255,7 +282,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                       //       fillColor: Colors.white),
                       // ),
                       // const SizedBox(height: 14.0),
-                      // const Text('Date of birth'),
+                      // const AutoSizeText('Date of birth'),
                       // const SizedBox(height: 4.0),
                       // TextFormField(
                       //   controller: dobController,
@@ -275,7 +302,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                       //       fillColor: Colors.white),
                       // ),
                       // const SizedBox(height: 14.0),
-                      // const Text('Gender'),
+                      // const AutoSizeText('Gender'),
                       // const SizedBox(height: 4.0),
                       // TextFormField(
                       //   controller: genderController,
@@ -295,7 +322,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                       //       fillColor: Colors.white),
                       // ),
                       // const SizedBox(height: 14.0),
-                      // const Text('Address'),
+                      // const AutoSizeText('Address'),
                       // const SizedBox(height: 4.0),
                       // TextFormField(
                       //   controller: addressController,
@@ -318,7 +345,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                         height: 30.0,
                       ),
                       Center(
-                        child:    GestureDetector(
+                        child: GestureDetector(
                           onTap: () => updateProfile(context),
                           child: Consumer<ProviderServices>(
                             builder: (_, value, __) => Center(
@@ -331,17 +358,22 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                                 ),
                                 child: value.isLoading == true
                                     ? const SpinKitCircle(
-                                  color: Colors.white,
-                                )
-                                    : const Center(
-                                  child: Text(
-                                    'update Profile',
-                                    style: TextStyle(
                                         color: Colors.white,
-                                        fontSize: 20.0,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
+                                      )
+                                    : Center(
+                                        child: Text(
+                                          'update Profile',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              //ios : 1.5
+                                              fontSize: 2.0 *
+                                                  MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                  0.01,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
                               ),
                             ),
                           ),

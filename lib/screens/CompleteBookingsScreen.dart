@@ -3,7 +3,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:maps_launcher/maps_launcher.dart';
 import 'package:provider/provider.dart';
 import 'package:vensemartserviceprovider/screens/provider/provider_services.dart';
-
+import 'package:auto_size_text/auto_size_text.dart';
 
 class CompleteBookingsScreen extends StatefulWidget {
   final String bookingId;
@@ -37,30 +37,26 @@ class _CompleteBookingsScreenState extends State<CompleteBookingsScreen> {
     }
   }
 
-
   void endBooking(context) async {
     if (true) {
       providerServices?.endBooking(map: {
-        "booking_id":1.toString(),
+        "booking_id": widget.bookingId.toString(),
         "status": 3.toString()
       }, context: context);
     }
   }
 
-
-
-
   @override
   Widget build(BuildContext context) {
-    return  WillPopScope(
+    return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
         backgroundColor: Color.fromRGBO(234, 234, 234, 3),
         appBar: AppBar(
           backgroundColor: Color(0xff1456f1),
-          title:  Text("End Booking"),
-          leading:  IconButton(
-            icon:  CircleAvatar(
+          title: Text("End Booking"),
+          leading: IconButton(
+            icon: CircleAvatar(
               radius: 20,
               backgroundColor: Colors.white,
               child: Center(
@@ -84,40 +80,44 @@ class _CompleteBookingsScreenState extends State<CompleteBookingsScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-
-
-
-
-
               Container(
                 padding: EdgeInsets.only(left: 12),
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height/6,
+                height: MediaQuery.of(context).size.height / 6,
                 decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12.0)
-                ),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12.0)),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Text('End booking',style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
-
-                    Text('Location : ${widget.userAddress}',style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w400),),
-
-                    Text('29 October 2022',style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w400)),
-
+                    AutoSizeText('End booking',
+                        style: TextStyle(
+                            fontSize:
+                                1.5 * MediaQuery.of(context).size.height * 0.01,
+                            fontWeight: FontWeight.bold)),
+                    AutoSizeText(
+                      'Location : ${widget.userAddress}',
+                      style: TextStyle(
+                          fontSize:
+                              1.5 * MediaQuery.of(context).size.height * 0.01,
+                          fontWeight: FontWeight.w400),
+                    ),
+                    AutoSizeText('29 October 2022',
+                        style: TextStyle(
+                            fontSize:
+                                1.5 * MediaQuery.of(context).size.height * 0.01,
+                            fontWeight: FontWeight.w400)),
                   ],
                 ),
               ),
-              SizedBox(height: 20.0,),
-
+              SizedBox(
+                height: 20.0,
+              ),
               Padding(
                 padding: const EdgeInsets.only(left: 12.0),
                 child: Row(
-
                   children: [
-
                     GestureDetector(
                       onTap: () => acceptBooking(context),
                       child: Consumer<ProviderServices>(
@@ -131,51 +131,60 @@ class _CompleteBookingsScreenState extends State<CompleteBookingsScreen> {
                             ),
                             child: value2.isLoading == true
                                 ? const SpinKitCircle(
-                              color: Colors.white,
-                            )
-                                : const Center(
-                              child: Text(
-                                'End Booking',
-                                style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
+                                  )
+                                : Center(
+                                    child: Text(
+                                      'End Booking',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          //ios : 1.5
+                                          fontSize: 2.0 *
+                                              MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.01,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
                           ),
                         ),
                       ),
                     ),
-
-
-
-
                   ],
                 ),
               ),
-              SizedBox(height: 90.0,),
-
+              SizedBox(
+                height: 90.0,
+              ),
               Container(
-                padding: EdgeInsets.only(left: 12,top: 20),
+                padding: EdgeInsets.only(left: 12, top: 20),
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height/9,
+                height: MediaQuery.of(context).size.height / 9,
                 decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(12.0)
-                ),
+                    borderRadius: BorderRadius.circular(12.0)),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    // Text('New Request',style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
-                    Text('Having completed your booking, please kindly end it ',style: TextStyle(fontSize:18.0, fontWeight: FontWeight.w300),),
+                    // AutoSizeText('New Request',style: TextStyle( //ios : 1.5
+                    // fontSize: 2.0 *
+                    // MediaQuery.of(context).size.height *
+                    // 0.01, fontWeight: FontWeight.bold)),
+                    AutoSizeText(
+                      'Having completed your booking, please kindly end it ',
+                      style: TextStyle(
+                          fontSize: 18.0, fontWeight: FontWeight.w300),
+                    ),
 
-                    // Text('29 October 2022',style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w400)),
-
+                    // AutoSizeText('29 October 2022',style: TextStyle( //ios : 1.5
+                    // fontSize: 2.0 *
+                    // MediaQuery.of(context).size.height *
+                    // 0.01, fontWeight: FontWeight.w400)),
                   ],
                 ),
               ),
-
             ],
           ),
         ),
@@ -183,8 +192,3 @@ class _CompleteBookingsScreenState extends State<CompleteBookingsScreen> {
     );
   }
 }
-
-
-
-
-

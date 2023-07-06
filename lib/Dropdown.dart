@@ -29,8 +29,9 @@ class _DropdownState extends State<Dropdown> {
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Text(
                 item,
-                style: const TextStyle(
-                  fontSize: 14,
+                style: TextStyle(
+                  //ios : 1.5
+                  fontSize: 2.0 * MediaQuery.of(context).size.height * 0.01,
                 ),
               ),
             ),
@@ -72,23 +73,21 @@ class _DropdownState extends State<Dropdown> {
               'Select Item',
               style: TextStyle(
                 fontSize: 14,
-                color: Theme
-                    .of(context)
-                    .hintColor,
+                color: Theme.of(context).hintColor,
               ),
             ),
             items: _addDividersAfterItems(items),
-            customItemsHeights: _getCustomItemsHeights(),
+            // customItemsHeights: _getCustomItemsHeights(),
             value: selectedValue,
             onChanged: (value) {
               setState(() {
                 selectedValue = value as String;
               });
             },
-            buttonHeight: 40,
-            dropdownMaxHeight: 200,
-            buttonWidth: 140,
-            itemPadding: const EdgeInsets.symmetric(horizontal: 8.0),
+            // buttonHeight: 40,
+            // dropdownMaxHeight: 200,
+            // buttonWidth: 140,
+            // itemPadding: const EdgeInsets.symmetric(horizontal: 8.0),
           ),
         ),
       ),

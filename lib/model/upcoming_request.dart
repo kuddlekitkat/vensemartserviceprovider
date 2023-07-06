@@ -37,6 +37,7 @@ class Data {
   String? serviceType;
   dynamic description;
   dynamic userAddress;
+  dynamic userMobile;
   dynamic userLat;
   dynamic userLong;
   String? bookingDate;
@@ -63,6 +64,7 @@ class Data {
     this.serviceType,
     this.description,
     this.userAddress,
+    this.userMobile,
     this.userLat,
     this.userLong,
     this.bookingDate,
@@ -90,6 +92,7 @@ class Data {
     serviceType =  json["service_type"];
     description = json["description"];
     userAddress = json["user_address"];
+    userMobile = json["user_mobile"];
     userLat = json["user_lat"];
     userLong = json["user_long"];
     bookingDate = json["booking_date"];
@@ -118,6 +121,7 @@ class Data {
     data['service_type'] = serviceType;
     data['description'] = description;
     data['user_address'] = userAddress;
+    data['user_mobile'] = userMobile;
     data['user_lat'] = userLat;
     data['user_long'] = userLong;
     data['booking_date'] = bookingDate;

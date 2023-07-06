@@ -3,23 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:vensemartserviceprovider/screens/provider/provider_services.dart';
-
+import 'package:auto_size_text/auto_size_text.dart';
 import 'ServiceLocationScreen.dart';
 
 class ServiceIntroScreen extends StatefulWidget {
   const ServiceIntroScreen({Key? key}) : super(key: key);
-
-
-
-
 
   @override
   State<ServiceIntroScreen> createState() => _ServiceIntroScreenState();
 }
 
 class _ServiceIntroScreenState extends State<ServiceIntroScreen> {
-
-
   ProviderServices? providerServices;
   TextEditingController controller = TextEditingController();
   String _query = '';
@@ -27,10 +21,7 @@ class _ServiceIntroScreenState extends State<ServiceIntroScreen> {
 
   int intval = 0;
 
-
   String? selectedValue;
-
-
 
   @override
   void initState() {
@@ -42,9 +33,8 @@ class _ServiceIntroScreenState extends State<ServiceIntroScreen> {
 
   void sendServiceId(context) async {
     if (true) {
-      providerServices?.sendServiceId(map: {
-        "service_type_id": selectedValue.toString()
-      }, context: context);
+      providerServices?.sendServiceId(
+          map: {"service_type_id": selectedValue.toString()}, context: context);
     }
   }
 
@@ -54,12 +44,6 @@ class _ServiceIntroScreenState extends State<ServiceIntroScreen> {
 
   @override
   Widget build(BuildContext context) {
-
-
-
-
-
-
     List<DropdownMenuItem<String>> _addDividersAfterItems(List<String> items) {
       List<DropdownMenuItem<String>> _menuItems = [];
       for (var item in items) {
@@ -71,8 +55,9 @@ class _ServiceIntroScreenState extends State<ServiceIntroScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: Text(
                   item,
-                  style: const TextStyle(
-                    fontSize: 14,
+                  style: TextStyle(
+                    //ios : 1.5
+                    fontSize: 2.0 * MediaQuery.of(context).size.height * 0.01,
                   ),
                 ),
               ),
@@ -122,165 +107,174 @@ class _ServiceIntroScreenState extends State<ServiceIntroScreen> {
       return Colors.red;
     }
 
-    return Scaffold(
-        resizeToAvoidBottomInset: false,
-        backgroundColor: Color(0xff1456f1),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Container(
-              alignment: Alignment.centerLeft,
-              margin: EdgeInsets.only(left: 12.0,bottom: 4.0),
-              child: Text('Service Details',style: TextStyle(fontWeight:FontWeight.bold,fontSize: 40,color: Colors.white),),
-            ),
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+          resizeToAvoidBottomInset: false,
+          backgroundColor: Color(0xff1456f1),
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Container(
+                alignment: Alignment.centerLeft,
+                margin: EdgeInsets.only(left: 12.0, bottom: 4.0),
+                child: AutoSizeText(
+                  'Service Details',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 3 * MediaQuery.of(context).size.height * 0.01,
+                      color: Colors.white),
+                ),
+              ),
+              Container(
+                height: MediaQuery.of(context).size.height / 1.8,
+                width: double.infinity,
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(40.0),
+                    topRight: Radius.circular(40.0),
+                  ),
+                ),
+                child: Consumer<ProviderServices>(builder: (_, provider, __) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 25.0,
+                      ),
 
-
-
-            Container(
-              height: MediaQuery.of(context).size.height/1.8,
-              width: double.infinity,
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(40.0),
-                  topRight: Radius.circular(40.0),),),
-              child: Consumer<ProviderServices>(
-                  builder: (_, provider, __) {
-                    return
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(height: 25.0,),
-
-
-                          Container(
-                            decoration: BoxDecoration(
-                                color: Color.fromRGBO(250, 250, 254, 1),
-                                borderRadius: BorderRadius.circular(
-                                    12.0) //<-- SEE HERE
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Color.fromRGBO(250, 250, 254, 1),
+                            borderRadius:
+                                BorderRadius.circular(12.0) //<-- SEE HERE
                             ),
-                            margin: EdgeInsets.all(12.0),
-                            child: Center(
-                              child: DropdownButtonHideUnderline(
-                                child: DropdownButton2(
-                                  hint: Text(
-                                    'Select Service',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      color: Theme
-                                          .of(context)
-                                          .hintColor,
-                                    ),
-                                  ),
-                                  items: providerServices?.servicesModel?.data?.map((item) =>
-                                      DropdownMenuItem<String>(
+                        margin: EdgeInsets.all(12.0),
+                        child: Center(
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButton2(
+                              hint: Text(
+                                'Select Service',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: Theme.of(context).hintColor,
+                                ),
+                              ),
+                              items: providerServices?.servicesModel?.data
+                                  ?.map((item) => DropdownMenuItem<String>(
                                         value: item.id.toString(),
                                         child: Text(
                                           item.categoryName.toString(),
-                                          style: const TextStyle(
-                                            fontSize: 14,
+                                          style: TextStyle(
+                                            //ios : 1.5
+                                            fontSize: 2.0 *
+                                                MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.01,
                                           ),
                                         ),
                                       ))
-                                      .toList(),
-                                  value: selectedValue,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      selectedValue = value as String;
-                                    });
-                                  },
-                                  buttonHeight: 70,
-                                  buttonWidth: 280,
-                                  itemHeight: 50,
-                                ),
-                              ),
+                                  .toList(),
+                              value: selectedValue,
+                              onChanged: (value) {
+                                setState(() {
+                                  selectedValue = value as String;
+                                });
+                              },
+                              // buttonHeight: screenHeight / 11,
+                              // buttonWidth: screenWidth / 1.05,
+                              // itemHeight: screenHeight / 17,
                             ),
                           ),
+                        ),
+                      ),
 
+                      // Container(
+                      //   decoration: BoxDecoration(
+                      //       color: Color.fromRGBO(250, 250, 254, 1),
+                      //       borderRadius: BorderRadius.circular(
+                      //           12.0) //<-- SEE HERE
+                      //   ),
+                      //   margin: EdgeInsets.all(12.0),
+                      //   child: Center(
+                      //     child: DropdownButtonHideUnderline(
+                      //       child: DropdownButton2(
+                      //         hint: Text(
+                      //           'Select Item',
+                      //           style: TextStyle(
+                      //             fontSize: 20,
+                      //             color: Theme
+                      //                 .of(context)
+                      //                 .hintColor,
+                      //           ),
+                      //         ),
+                      //         items: items
+                      //             .map((item) =>
+                      //             DropdownMenuItem<String>(
+                      //               value: item,
+                      //               child: Text(
+                      //                 item,
+                      //                 style: const TextStyle(
+                      //                   fontSize: 14,
+                      //                 ),
+                      //               ),
+                      //             ))
+                      //             .toList(),
+                      //         value: selectedValue,
+                      //         onChanged: (value) {
+                      //           setState(() {
+                      //             selectedValue = value as String;
+                      //           });
+                      //         },
+                      //         buttonHeight: 70,
+                      //         buttonWidth: 280,
+                      //         itemHeight: 50,
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
 
-                          // Container(
-                          //   decoration: BoxDecoration(
-                          //       color: Color.fromRGBO(250, 250, 254, 1),
-                          //       borderRadius: BorderRadius.circular(
-                          //           12.0) //<-- SEE HERE
-                          //   ),
-                          //   margin: EdgeInsets.all(12.0),
-                          //   child: Center(
-                          //     child: DropdownButtonHideUnderline(
-                          //       child: DropdownButton2(
-                          //         hint: Text(
-                          //           'Select Item',
-                          //           style: TextStyle(
-                          //             fontSize: 20,
-                          //             color: Theme
-                          //                 .of(context)
-                          //                 .hintColor,
-                          //           ),
-                          //         ),
-                          //         items: items
-                          //             .map((item) =>
-                          //             DropdownMenuItem<String>(
-                          //               value: item,
-                          //               child: Text(
-                          //                 item,
-                          //                 style: const TextStyle(
-                          //                   fontSize: 14,
-                          //                 ),
-                          //               ),
-                          //             ))
-                          //             .toList(),
-                          //         value: selectedValue,
-                          //         onChanged: (value) {
-                          //           setState(() {
-                          //             selectedValue = value as String;
-                          //           });
-                          //         },
-                          //         buttonHeight: 70,
-                          //         buttonWidth: 280,
-                          //         itemHeight: 50,
-                          //       ),
-                          //     ),
-                          //   ),
-                          // ),
-
-
-                          GestureDetector(
-                            onTap: () => sendServiceId(context),
-                            child: Consumer<ProviderServices>(
-                              builder: (_, value, __) => Center(
-                                child: Container(
-                                  height: screenHeight / 11,
-                                  width: screenWidth / 1.10,
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xff1456f1),
-                                    borderRadius: BorderRadius.circular(90.0),
-                                  ),
-                                  child: value.isLoading == true
-                                      ? const SpinKitCircle(
-                                    color: Colors.white,
-                                  )
-                                      : const Center(
-                                    child: Text(
-                                      'Proceed',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20.0,
-                                          fontWeight: FontWeight.bold),
+                      GestureDetector(
+                        onTap: () => sendServiceId(context),
+                        child: Consumer<ProviderServices>(
+                          builder: (_, value, __) => Center(
+                            child: Container(
+                              height: screenHeight / 11,
+                              width: screenWidth / 1.10,
+                              decoration: BoxDecoration(
+                                color: const Color(0xff1456f1),
+                                borderRadius: BorderRadius.circular(90.0),
+                              ),
+                              child: value.isLoading == true
+                                  ? const SpinKitCircle(
+                                      color: Colors.white,
+                                    )
+                                  : Center(
+                                      child: Text(
+                                        'Proceed',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            //ios : 1.5
+                                            fontSize: 2.0 *
+                                                MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.01,
+                                            fontWeight: FontWeight.bold),
+                                      ),
                                     ),
-                                  ),
-                                ),
-                              ),
                             ),
                           ),
-
-                        ],
-                      );
-                  }
+                        ),
+                      ),
+                    ],
+                  );
+                }),
               ),
-            ),
-
-          ],
-        )
-
+            ],
+          )),
     );
   }
 }

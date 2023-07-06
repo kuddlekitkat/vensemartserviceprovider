@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class OffersCard extends StatelessWidget {
   const OffersCard({Key? key}) : super(key: key);
@@ -23,8 +24,8 @@ class OffersCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            height: screenHeight/8,
-            width: screenWidth/4.6,
+            height: screenHeight / 8,
+            width: screenWidth / 4.6,
             margin: EdgeInsets.only(right: 14),
             decoration: BoxDecoration(
               color: Color(0xff1456f1),
@@ -32,34 +33,40 @@ class OffersCard extends StatelessWidget {
                 topLeft: Radius.circular(12.0),
                 bottomLeft: Radius.circular(12.0),
               ),
-            ),child: Center(
-            child: Text('14',style: TextStyle(fontSize: 29,color: Colors.white),),
+            ),
+            child: Center(
+              child: AutoSizeText(
+                '14',
+                style: TextStyle(
+                    fontSize: 2.3 * MediaQuery.of(context).size.height * 0.01,
+                    color: Colors.white),
+              ),
+            ),
           ),
-          ),
-
-
-
           Container(
-
-            height:screenHeight/8,
-            width: screenHeight/3.5,
+            height: screenHeight / 8,
+            width: screenHeight / 3.5,
             decoration: BoxDecoration(
-              color:Colors.white,
-
+              color: Colors.white,
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Flexible(
-                  child: Text("Get 10% discount for  exciting customers and many "
-                      "more discounts on the way",style: TextStyle(fontSize: 10,color: Colors.black),),
+                  child: Text(
+                    "Get 10% discount for  exciting customers and many "
+                    "more discounts on the way",
+                    style: TextStyle(
+                        fontSize:
+                            1.5 * MediaQuery.of(context).size.height * 0.01,
+                        color: Colors.black),
+                  ),
                 ),
               ],
             ),
           ),
         ],
       ),
-
     );
   }
 }

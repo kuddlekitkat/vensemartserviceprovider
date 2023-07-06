@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vensemartserviceprovider/screens/IdentityVerificationCompleteScreen.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class AddressVerificationScreen extends StatelessWidget {
   const AddressVerificationScreen({Key? key}) : super(key: key);
@@ -11,9 +12,9 @@ class AddressVerificationScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Color(0xff1456f1),
-          title:  Text("Address Verification"),
-          leading:  IconButton(
-            icon:  CircleAvatar(
+          title: Text("Address Verification"),
+          leading: IconButton(
+            icon: CircleAvatar(
               radius: 20,
               backgroundColor: Colors.white,
               child: Center(
@@ -37,7 +38,7 @@ class AddressVerificationScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('state'),
+                AutoSizeText('state'),
                 SizedBox(height: 4.0),
                 TextField(
                   decoration: InputDecoration(
@@ -53,10 +54,9 @@ class AddressVerificationScreen extends StatelessWidget {
                       filled: true,
                       hintStyle: new TextStyle(color: Colors.grey[600]),
                       fillColor: Colors.white),
-
                 ),
                 SizedBox(height: 14.0),
-                Text('LGA'),
+                AutoSizeText('LGA'),
                 SizedBox(height: 4.0),
                 TextFormField(
                   decoration: InputDecoration(
@@ -72,10 +72,9 @@ class AddressVerificationScreen extends StatelessWidget {
                       filled: true,
                       hintStyle: new TextStyle(color: Colors.grey[600]),
                       fillColor: Colors.white),
-
                 ),
                 SizedBox(height: 14.0),
-                Text('Home Address'),
+                AutoSizeText('Home Address'),
                 SizedBox(height: 4.0),
                 TextFormField(
                   decoration: InputDecoration(
@@ -91,10 +90,9 @@ class AddressVerificationScreen extends StatelessWidget {
                       filled: true,
                       hintStyle: new TextStyle(color: Colors.grey[600]),
                       fillColor: Colors.white),
-
                 ),
                 SizedBox(height: 14.0),
-                Text('Shop Address'),
+                AutoSizeText('Shop Address'),
                 SizedBox(height: 4.0),
                 TextFormField(
                   decoration: InputDecoration(
@@ -110,11 +108,9 @@ class AddressVerificationScreen extends StatelessWidget {
                       filled: true,
                       hintStyle: new TextStyle(color: Colors.grey[600]),
                       fillColor: Colors.white),
-
                 ),
-
                 SizedBox(height: 14.0),
-                Text('Closest Landmark'),
+                AutoSizeText('Closest Landmark'),
                 SizedBox(height: 4.0),
                 TextFormField(
                   decoration: InputDecoration(
@@ -130,11 +126,10 @@ class AddressVerificationScreen extends StatelessWidget {
                       filled: true,
                       hintStyle: new TextStyle(color: Colors.grey[600]),
                       fillColor: Colors.white),
-
                 ),
-
-                SizedBox(height: 15,),
-
+                SizedBox(
+                  height: 15,
+                ),
                 Row(
                   children: [
                     Container(
@@ -145,7 +140,9 @@ class AddressVerificationScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12.0),
                       ),
                     ),
-                    SizedBox(width: 10,),
+                    SizedBox(
+                      width: 10,
+                    ),
                     Container(
                       height: 80,
                       width: 80,
@@ -154,7 +151,9 @@ class AddressVerificationScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12.0),
                       ),
                     ),
-                    SizedBox(width: 10,),
+                    SizedBox(
+                      width: 10,
+                    ),
                     Container(
                       height: 80,
                       width: 80,
@@ -165,17 +164,11 @@ class AddressVerificationScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-
-
-
-
-
-                SizedBox(height: 40.0,),
-
-
-
+                SizedBox(
+                  height: 40.0,
+                ),
                 GestureDetector(
-                  onTap: (){
+                  onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -185,28 +178,30 @@ class AddressVerificationScreen extends StatelessWidget {
                   },
                   child: Center(
                     child: Container(
-                      height: MediaQuery.of(context).size.height/13,
+                      height: MediaQuery.of(context).size.height / 13,
                       width: MediaQuery.of(context).size.width / 1.1,
                       decoration: BoxDecoration(
                         color: Color(0xff1456f1),
                         borderRadius: BorderRadius.circular(60.0),
                       ),
-                      child: const Center(
-                        child: Text( 'Continue',style: TextStyle(color: Colors.white,fontSize: 22),),
-
+                      child: Center(
+                        child: Text(
+                          'Continue',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 2.3 *
+                                  MediaQuery.of(context).size.height *
+                                  0.01),
+                        ),
                       ),
                     ),
                   ),
                 )
               ],
-
-
             ),
           ),
         ),
       ),
-
     );
-
   }
 }

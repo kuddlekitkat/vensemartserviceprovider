@@ -1,7 +1,8 @@
 import 'dart:io';
 import 'dart:convert' as convert;
-import 'package:dio/adapter.dart';
+// import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
+import 'package:dio/io.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
@@ -20,8 +21,8 @@ mixin ApiServices {
     BaseOptions _options = BaseOptions(
       baseUrl: baseUrl,
       headers: _requestHeaders,
-      connectTimeout: 200000,
-      receiveTimeout: 200000,
+      connectTimeout: Duration(days: 0, hours: 0, minutes: 0, seconds: 0, milliseconds: 200000, microseconds: 0),
+      receiveTimeout: Duration(days: 0, hours: 0, minutes: 0, seconds: 0, milliseconds: 200000, microseconds: 0),
     );
 
     dio = Dio(_options);

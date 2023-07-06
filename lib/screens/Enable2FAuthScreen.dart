@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class Enable2FAuthScreen extends StatelessWidget {
   const Enable2FAuthScreen({Key? key}) : super(key: key);
@@ -11,9 +12,9 @@ class Enable2FAuthScreen extends StatelessWidget {
         backgroundColor: Color.fromRGBO(234, 234, 234, 1),
         appBar: AppBar(
           backgroundColor: Color(0xff1456f1),
-          title:  Text("Enable 2fa"),
-          leading:  IconButton(
-            icon:  CircleAvatar(
+          title: Text("Enable 2fa"),
+          leading: IconButton(
+            icon: CircleAvatar(
               radius: 20,
               backgroundColor: Colors.white,
               child: Center(
@@ -36,7 +37,7 @@ class Enable2FAuthScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('PIN CODE'),
+              AutoSizeText('PIN CODE'),
               SizedBox(height: 4.0),
               TextField(
                 decoration: InputDecoration(
@@ -52,10 +53,9 @@ class Enable2FAuthScreen extends StatelessWidget {
                     filled: true,
                     hintStyle: new TextStyle(color: Colors.grey[600]),
                     fillColor: Colors.white),
-
               ),
               SizedBox(height: 14.0),
-              Text('AUTH CODE'),
+              AutoSizeText('AUTH CODE'),
               SizedBox(height: 4.0),
               TextFormField(
                 decoration: InputDecoration(
@@ -71,28 +71,30 @@ class Enable2FAuthScreen extends StatelessWidget {
                     filled: true,
                     hintStyle: new TextStyle(color: Colors.grey[600]),
                     fillColor: Colors.white),
-
               ),
-
-              SizedBox(height: 40.0,),
-
+              SizedBox(
+                height: 40.0,
+              ),
               Center(
                 child: Container(
-                  height: MediaQuery.of(context).size.height/13,
+                  height: MediaQuery.of(context).size.height / 13,
                   width: MediaQuery.of(context).size.width / 1.1,
                   decoration: BoxDecoration(
                     color: Colors.blueAccent,
                     borderRadius: BorderRadius.circular(60.0),
                   ),
-                  child: const Center(
-                    child: Text( 'Enable 2FA',style: TextStyle(color: Colors.white,fontSize: 22),),
-
+                  child: Center(
+                    child: Text(
+                      'Enable 2FA',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize:
+                              2.3 * MediaQuery.of(context).size.height * 0.01),
+                    ),
                   ),
                 ),
               )
             ],
-
-
           ),
         ),
       ),

@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
-class WithdrawalHistoryScreen extends StatelessWidget {
+class WithdrawalHistoryScreen extends StatefulWidget {
   const WithdrawalHistoryScreen({Key? key}) : super(key: key);
 
+  @override
+  State<WithdrawalHistoryScreen> createState() => _WithdrawalHistoryScreenState();
+}
+
+class _WithdrawalHistoryScreenState extends State<WithdrawalHistoryScreen> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -11,9 +17,9 @@ class WithdrawalHistoryScreen extends StatelessWidget {
         backgroundColor: Color.fromRGBO(234, 234, 234, 3),
         appBar: AppBar(
           backgroundColor: Color(0xff1456f1),
-          title:  Text("Withdrawal History"),
-          leading:  IconButton(
-            icon:  CircleAvatar(
+          title: Text("Withdrawal History"),
+          leading: IconButton(
+            icon: CircleAvatar(
               radius: 20,
               backgroundColor: Colors.white,
               child: Center(
@@ -33,175 +39,132 @@ class WithdrawalHistoryScreen extends StatelessWidget {
         ),
         body: Container(
           color: Colors.white,
-          child: Column(
-
-              mainAxisAlignment: MainAxisAlignment.start,
-              children:  [
-                SizedBox(height: 20),
-                Center(
-                  child: Container(
-                    height: MediaQuery.of(context).size.height / 16,
-                    width: MediaQuery.of(context).size.width /1.08,
-                    decoration: BoxDecoration(
-                      color: Colors.grey,
-                      borderRadius: BorderRadius.only(topLeft: Radius.circular(12.0),topRight: Radius.circular(12.0)),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+            SizedBox(height: 20),
+            Center(
+              child: Container(
+                height: MediaQuery.of(context).size.height / 16,
+                width: MediaQuery.of(context).size.width / 1.08,
+                decoration: BoxDecoration(
+                  color: Colors.grey,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(12.0),
+                      topRight: Radius.circular(12.0)),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
                       children: [
-
-                        Row(
-                          children: [
-
-                            SizedBox(width: 13.0),
-                            Icon(Icons.whatsapp,color: Colors.green,),
-                            SizedBox(width: 13.0),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const [
-                                Text('Change Password'),
-                                Text('Create new Password'),
-                              ],
-                            ),
-
+                        SizedBox(width: 13.0),
+                        Icon(
+                          Icons.email,
+                          color: Colors.green,
+                        ),
+                        SizedBox(width: 13.0),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const [
+                            AutoSizeText('Change Password'),
+                            AutoSizeText('Create new Password'),
                           ],
                         ),
-
-
-
-
-                        GestureDetector(
-                          onTap: (){
-
-
-
-                          },
-                          child:  Padding(
-                            padding: EdgeInsets.only(right: 19.0),
-                            child: Text('20000'),
-
-                          ),
-                        ),
-
-
                       ],
                     ),
-
-
-
-                  ),
-                ),
-                Center(
-                  child: Container(
-                    height: MediaQuery.of(context).size.height / 15,
-                    width: MediaQuery.of(context).size.width /1.08,
-                    decoration: BoxDecoration(
-                      color: Colors.blueAccent,
-
+                    GestureDetector(
+                      onTap: () {},
+                      child: Padding(
+                        padding: EdgeInsets.only(right: 19.0),
+                        child: AutoSizeText('20000'),
+                      ),
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  ],
+                ),
+              ),
+            ),
+            Center(
+              child: Container(
+                height: MediaQuery.of(context).size.height / 15,
+                width: MediaQuery.of(context).size.width / 1.08,
+                decoration: BoxDecoration(
+                  color: Colors.blueAccent,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
                       children: [
-
-                        Row(
+                        SizedBox(width: 13.0),
+                        Icon(
+                          Icons.chat,
+                          color: Colors.greenAccent,
+                        ),
+                        SizedBox(width: 13.0),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-
-                            SizedBox(width: 13.0),
-                            Icon(Icons.chat,color: Colors.greenAccent,),
-                            SizedBox(width: 13.0),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('Change Password'),
-                                Text('Create new Password'),
-                              ],
-                            ),
-
+                            AutoSizeText('Change Password'),
+                            AutoSizeText('Create new Password'),
                           ],
                         ),
-
-
-
-
-                        GestureDetector(
-                          onTap: (){
-
-
-
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.only(right: 19.0),
-                            child: Text('20000'),
-                          ),
-                        ),
-
                       ],
                     ),
-
-
-
-                  ),
-                ),
-                Center(
-                  child: Container(
-                    height: MediaQuery.of(context).size.height / 16,
-                    width: MediaQuery.of(context).size.width /1.08,
-                    decoration: BoxDecoration(
-                      color: Colors.grey,
-                      borderRadius: BorderRadius.only(bottomLeft: Radius.circular(12.0),bottomRight: Radius.circular(12.0)),
+                    GestureDetector(
+                      onTap: () {},
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 19.0),
+                        child: AutoSizeText('20000'),
+                      ),
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  ],
+                ),
+              ),
+            ),
+            Center(
+              child: Container(
+                height: MediaQuery.of(context).size.height / 16,
+                width: MediaQuery.of(context).size.width / 1.08,
+                decoration: BoxDecoration(
+                  color: Colors.grey,
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(12.0),
+                      bottomRight: Radius.circular(12.0)),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
                       children: [
-
-                        Row(
-                          children: [
-
-                            SizedBox(width: 13.0),
-                            Icon(Icons.notifications,color: Colors.red,),
-                            SizedBox(width: 13.0),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const [
-                                Text('Change Password'),
-                                Text('Create new Password'),
-                              ],
-                            ),
-
+                        SizedBox(width: 13.0),
+                        Icon(
+                          Icons.notifications,
+                          color: Colors.red,
+                        ),
+                        SizedBox(width: 13.0),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const [
+                            AutoSizeText('Change Password'),
+                            AutoSizeText('Create new Password'),
                           ],
                         ),
-
-
-
-
-                        GestureDetector(
-                          onTap: (){
-
-                          },
-                          child: Padding(
-                            padding: EdgeInsets.only(right: 19.0),
-                            child: Text('20000'),
-
-                          ),
-                        ),
-
-
                       ],
                     ),
-
-
-
-                  ),
+                    GestureDetector(
+                      onTap: () {},
+                      child: Padding(
+                        padding: EdgeInsets.only(right: 19.0),
+                        child: AutoSizeText('20000'),
+                      ),
+                    ),
+                  ],
                 ),
-
-
-
-              ]
-
-          ),
+              ),
+            ),
+          ]),
         ),
       ),
     );

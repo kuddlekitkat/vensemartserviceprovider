@@ -30,7 +30,7 @@ class ServicesProviderPlans {
 }
 
 class Data {
-  String? id;
+  dynamic id;
   String? planType;
   String? amount;
   String? sAmount;

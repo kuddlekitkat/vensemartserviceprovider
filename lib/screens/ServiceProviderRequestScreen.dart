@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:vensemartserviceprovider/widgets/components/CancelledRequestList.dart';
 import 'package:vensemartserviceprovider/widgets/components/CompletedRequestList.dart';
 import 'package:vensemartserviceprovider/widgets/components/RequestList.dart';
-import 'package:vensemartserviceprovider/widgets/components/ServiceRequestCard.dart';
 import 'package:flutter_advanced_segment/flutter_advanced_segment.dart';
 
-
+import '../widgets/Drawers/ServiceProviderHomeDrawer.dart';
 
 enum Segment {
   all,
@@ -29,17 +28,16 @@ extension SegmentsExtension on Segment {
   bool get isStarred => this == Segment.starred;
 }
 
-
 class ServiceProviderRequestScreen extends StatefulWidget {
-
-
   const ServiceProviderRequestScreen({Key? key}) : super(key: key);
 
   @override
-  State<ServiceProviderRequestScreen> createState() => _ServiceProviderRequestScreenState();
+  State<ServiceProviderRequestScreen> createState() =>
+      _ServiceProviderRequestScreenState();
 }
 
-class _ServiceProviderRequestScreenState extends State<ServiceProviderRequestScreen> {
+class _ServiceProviderRequestScreenState
+    extends State<ServiceProviderRequestScreen> {
   final _selectedSegment_05 = ValueNotifier('all');
 
   @override
@@ -48,19 +46,21 @@ class _ServiceProviderRequestScreenState extends State<ServiceProviderRequestScr
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Color.fromRGBO(234, 234, 234, 2),
-
+        drawer: ServiceProviderHomeDrawer(),
         body: SingleChildScrollView(
           child: Center(
             child: Column(
               children: [
                 Container(
                   color: Colors.white,
-
                   child: Column(
                     children: [
-                      SizedBox(height: 12.0,),
+                      SizedBox(
+                        height: 12.0,
+                      ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 13.0),
+                        padding:
+                            const EdgeInsets.only(bottom: 13.0, left: 12.0),
                         child: Center(
                           child: AdvancedSegment(
                             controller: _selectedSegment_05,
@@ -70,10 +70,11 @@ class _ServiceProviderRequestScreenState extends State<ServiceProviderRequestScr
                               'cancelled': 'Cancelled',
                             },
                             backgroundColor: Colors.white10,
-                            activeStyle: const TextStyle(
+                            activeStyle: TextStyle(
+                              fontSize:
+                                  1 * MediaQuery.of(context).size.height * 0.01,
                               color: Colors.white,
                               fontWeight: FontWeight.w600,
-
                             ),
                             inactiveStyle: const TextStyle(
                               color: Colors.grey,
@@ -100,47 +101,10 @@ class _ServiceProviderRequestScreenState extends State<ServiceProviderRequestScr
                     ],
                   ),
                 ),
-
               ],
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildLabel(
-      String label, {
-        Color color = Colors.black87,
-      }) {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        vertical: 25,
-      ),
-      child: Row(
-        children: [
-          Expanded(
-              child: Divider(
-                color: color,
-              )),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 10,
-            ),
-            child: Text(
-              label,
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                color: color,
-              ),
-            ),
-          ),
-          Expanded(
-              child: Divider(
-                color: color,
-              )),
-        ],
       ),
     );
   }

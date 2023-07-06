@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vensemartserviceprovider/screens/AddressVerificationScreen.dart';
 import 'package:vensemartserviceprovider/screens/NinVerificationScreen.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class IdentityVerificationScreen extends StatelessWidget {
   const IdentityVerificationScreen({Key? key}) : super(key: key);
@@ -10,12 +11,12 @@ class IdentityVerificationScreen extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-        backgroundColor: Color.fromRGBO(234, 234, 234, 2),
+        backgroundColor: const Color.fromRGBO(234, 234, 234, 2),
         appBar: AppBar(
-          backgroundColor: Color(0xff1456f1),
-          title:  const Text("Identity Verification"),
-          leading:  IconButton(
-            icon:  CircleAvatar(
+          backgroundColor: const Color(0xff1456f1),
+          title: const Text("Identity Verification"),
+          leading: IconButton(
+            icon: CircleAvatar(
               radius: 20,
               backgroundColor: Colors.white,
               child: Center(
@@ -40,7 +41,7 @@ class IdentityVerificationScreen extends StatelessWidget {
               Center(
                 child: Container(
                   height: MediaQuery.of(context).size.height / 10,
-                  width: MediaQuery.of(context).size.width /1.08,
+                  width: MediaQuery.of(context).size.width / 1.08,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(12.0),
@@ -48,60 +49,64 @@ class IdentityVerificationScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-
                       Row(
                         children: [
-
-                          SizedBox(width: 13.0),
-                          Icon(Icons.home,color: Colors.black,),
-                          SizedBox(width: 13.0),
+                          const SizedBox(width: 13.0),
+                          const Icon(
+                            Icons.home,
+                            color: Colors.black,
+                          ),
+                          const SizedBox(width: 13.0),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Nin Verification',style: TextStyle(color: Colors.black,fontSize: 19),),
-                              Text('Secure your account',style: TextStyle(color: Colors.grey)),
+                              AutoSizeText(
+                                'Nin Verification',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 2 *
+                                        MediaQuery.of(context).size.height *
+                                        0.01),
+                              ),
+                              AutoSizeText('Secure your account',
+                                  style: TextStyle(color: Colors.grey)),
                             ],
                           ),
-
                         ],
                       ),
-
-
                       GestureDetector(
-                        onTap: (){
-
+                        onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => NinVerificationScreen(),
+                              builder: (context) =>
+                                  const NinVerificationScreen(),
                             ),
                           );
-
                         },
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 19.0),
-                          child: Icon(Icons.keyboard_arrow_right,color: Colors.black,),
+                        child: const Padding(
+                          padding: EdgeInsets.only(right: 19.0),
+                          child: Icon(
+                            Icons.keyboard_arrow_right,
+                            color: Colors.black,
+                          ),
                         ),
                       ),
-
-
                     ],
                   ),
-
-
-
                 ),
               ),
-
-              SizedBox(height: 10.0,),
-
-
-              SizedBox(height: 5.0,),
+              const SizedBox(
+                height: 10.0,
+              ),
+              const SizedBox(
+                height: 5.0,
+              ),
               Center(
                 child: Container(
                   height: MediaQuery.of(context).size.height / 10,
-                  width: MediaQuery.of(context).size.width /1.08,
+                  width: MediaQuery.of(context).size.width / 1.08,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(12.0),
@@ -109,55 +114,55 @@ class IdentityVerificationScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-
                       Row(
                         children: [
-
-                          SizedBox(width: 13.0),
-                          Icon(Icons.home,color: Colors.black,),
-                          SizedBox(width: 13.0),
+                          const SizedBox(width: 13.0),
+                          const Icon(
+                            Icons.home,
+                            color: Colors.black,
+                          ),
+                          const SizedBox(width: 13.0),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Address Verification',style: TextStyle(color: Colors.black,fontSize: 19),),
-                              Text('Secure your account',style: TextStyle(color: Colors.grey)),
+                              AutoSizeText(
+                                'Address Verification',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 2 *
+                                        MediaQuery.of(context).size.height *
+                                        0.01),
+                              ),
+                              AutoSizeText('Secure your account',
+                                  style: TextStyle(color: Colors.grey)),
                             ],
                           ),
-
                         ],
                       ),
-
-
                       GestureDetector(
-                        onTap: (){
-
+                        onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => AddressVerificationScreen(),
+                              builder: (context) =>
+                                  const AddressVerificationScreen(),
                             ),
                           );
-
                         },
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 19.0),
-                          child: Icon(Icons.keyboard_arrow_right,color: Colors.black,),
+                        child: const Padding(
+                          padding: EdgeInsets.only(right: 19.0),
+                          child: Icon(
+                            Icons.keyboard_arrow_right,
+                            color: Colors.black,
+                          ),
                         ),
                       ),
-
-
                     ],
                   ),
-
-
-
                 ),
               ),
-
-
             ],
-
           ),
         ),
       ),

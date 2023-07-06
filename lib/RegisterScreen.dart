@@ -4,8 +4,9 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
-
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:vensemartserviceprovider/screens/TermsScreen.dart';
 import 'package:vensemartserviceprovider/screens/provider/provider_services.dart';
 
@@ -35,6 +36,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   String? deviceToken;
   var deviceInfo;
   String? device = '';
+  late bool _passwordVisible;
 
   @override
   void initState() {
@@ -42,10 +44,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
     deviceInfo = DeviceInfoPlugin();
     // try and print deviceInfo to see all required stuffs then get the device name and pass it to the registration function
     _getId();
-    _firebaseMessaging.getToken().then((token) {
-      deviceToken = token;
-      print("token is $token");
-    });
+    // _firebaseMessaging.getToken().then((token) {
+    //   deviceToken = token;
+    //   print("token is $token");
+    // });
+    initOneSignal(context);
+    _passwordVisible = false;
     super.initState();
   }
 
@@ -61,6 +65,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
       return androidDeviceInfo.id; // unique ID on Android
     }
     return device;
+  }
+
+  Future<void> initOneSignal(BuildContext context) async {
+    /// Set App Id.
+    await OneSignal.shared.setAppId("859c37cb-5f88-4423-b7f7-d1f28cf4d4ea");
+
+    /// Get the Onesignal userId and update that into the firebase.
+    /// So, that it can be used to send Notifications to users later.̥
+    final status = await OneSignal.shared.getDeviceState();
+    final String? osUserID = status?.userId;
+    deviceToken = osUserID;
+    // We will update this once he logged in and goes to dashboard.
+    ////updateUserProfile(osUserID);
+    // Store it into shared prefs, So that later we can use it.
+    // The promptForPushNotificationsWithUserResponse function will show the iOS push notification prompt. We recommend removing the following code and instead using an In-App Message to prompt for notification permission
+    await OneSignal.shared.promptUserForPushNotificationPermission(
+      fallbackToSettings: true,
+    );
   }
 
   void signUp(context) async {
@@ -87,8 +109,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
     if (true) {
       providerServices?.sendLocation(map: {
         "location": 'Wuse 2 Abuja',
-        "location_lat": "7.4701862",
-        "location_long": "9.078749"
+        "location_long": "7.4701862",
+        "location_lat": "9.078749"
       }, context: context);
     }
   }
@@ -111,7 +133,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     }
 
     return Scaffold(
-        backgroundColor: const Color(0xff1456f1),
+        backgroundColor: const Color(0xff25D366),
         body: Form(
           key: _globalFormKey,
           child: Column(
@@ -120,16 +142,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Container(
                 alignment: Alignment.centerLeft,
                 margin: const EdgeInsets.only(left: 12.0, bottom: 4.0),
-                child: const Text(
+                child: Text(
                   'Signup',
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 25,
+                      fontSize: 2.3 * MediaQuery.of(context).size.height * 0.01,
                       color: Colors.white),
                 ),
               ),
               Container(
-                height: MediaQuery.of(context).size.height / 1.65,
+                height: MediaQuery.of(context).size.height / 1.9,
                 width: double.infinity,
                 decoration: const BoxDecoration(
                   color: Colors.white,
@@ -139,12 +161,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ),
                 child: SizedBox(
-                  height: 380,
+                  height: MediaQuery.of(context).size.height / 1.3,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        height: 80,
+                        height: MediaQuery.of(context).size.height / 11.7,
                         child: Container(
                           margin: const EdgeInsets.all(12.0),
                           child: TextFormField(
@@ -171,7 +193,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
 
                       SizedBox(
-                        height: 80,
+                        height: MediaQuery.of(context).size.height / 11.8,
                         child: Container(
                           margin: const EdgeInsets.all(12.0),
                           child: TextFormField(
@@ -198,7 +220,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
 
                       SizedBox(
-                        height: 80,
+                        height: MediaQuery.of(context).size.height / 11.8,
                         child: Container(
                           margin: const EdgeInsets.all(12.0),
                           child: TextFormField(
@@ -243,10 +265,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
 
                       SizedBox(
-                        height: 85,
+                        height: MediaQuery.of(context).size.height / 11.8,
                         child: Container(
                           margin: const EdgeInsets.all(12.0),
                           child: TextFormField(
+                            obscureText: !_passwordVisible,
                             controller: passwordController,
                             validator: Validators.validatePlainPassword(),
                             decoration: InputDecoration(
@@ -262,7 +285,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 filled: true,
                                 hintText: 'password',
                                 prefixIcon: const Icon(Icons.lock),
-                                suffixIcon: const Icon(Icons.remove_red_eye),
+                                suffixIcon: IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      _passwordVisible = !_passwordVisible;
+                                    });
+                                  },
+                                  icon: Icon(
+                                      _passwordVisible
+                                          ? Icons.visibility
+                                          : Icons.visibility_off,
+                                      color:
+                                          Theme.of(context).primaryColorDark),
+                                ),
                                 hintStyle: TextStyle(color: Colors.grey[600]),
                                 fillColor:
                                     const Color.fromRGBO(250, 250, 254, 1)),
@@ -270,7 +305,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                       ),
                       SizedBox(
-                        height: 20,
+                        height: MediaQuery.of(context).size.height / 27.5,
                         child: Row(
                           children: [
                             SizedBox(
@@ -288,9 +323,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 });
                               },
                             ),
-                            const Text(
+                            Text(
                               'By checking the box,agree to our ',
-                              style: TextStyle(fontSize: 10),
+                              style: TextStyle(
+                                  //ios : 1.5
+                                  fontSize: 1.5 *
+                                      MediaQuery.of(context).size.height *
+                                      0.01),
                             ),
                             GestureDetector(
                               onTap: () {
@@ -301,12 +340,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   ),
                                 );
                               },
-                              child: const Text(
+                              child: Text(
                                 'terms and conditions',
                                 style: TextStyle(
                                     color: Colors.blueAccent,
                                     fontWeight: FontWeight.w600,
-                                    fontSize: 10),
+                                    fontSize: 1.3 *
+                                        MediaQuery.of(context).size.height *
+                                        0.01),
                               ),
                             ),
                           ],
@@ -320,22 +361,26 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         child: Consumer<ProviderServices>(
                           builder: (_, value, __) => Center(
                             child: Container(
-                              height: screenHeight / 14,
+                              height: screenHeight / 14.9,
                               width: screenWidth / 1.10,
                               decoration: BoxDecoration(
-                                color: const Color(0xff1456f1),
+                                color: const Color(0xff25D366),
                                 borderRadius: BorderRadius.circular(90.0),
                               ),
                               child: value.isLoading == true
                                   ? const SpinKitCircle(
                                       color: Colors.white,
                                     )
-                                  : const Center(
+                                  : Center(
                                       child: Text(
                                         'Register',
                                         style: TextStyle(
                                             color: Colors.white,
-                                            fontSize: 20.0,
+                                            fontSize: 2.5 *
+                                                MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.01,
                                             fontWeight: FontWeight.bold),
                                       ),
                                     ),
@@ -352,10 +397,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text('Don\'t have an account?',
+                          AutoSizeText('Already have an account?',
                               style: TextStyle(
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 20.0)),
+                                fontWeight: FontWeight.normal,
+                                fontSize: 2.0 *
+                                    MediaQuery.of(context).size.height *
+                                    0.01,
+                              )),
                           GestureDetector(
                             onTap: () {
                               Navigator.push(
@@ -365,11 +413,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 ),
                               );
                             },
-                            child: const Text(
+                            child: Text(
                               ' sign in',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 20.0,
+                                  fontSize: 2.5 *
+                                      MediaQuery.of(context).size.height *
+                                      0.01,
                                   color: Color(0xff1456f1)),
                             ),
                           )
